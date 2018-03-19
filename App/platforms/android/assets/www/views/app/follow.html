@@ -1,0 +1,55 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我的关注与收藏
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="page17-2">
+            <div class="hd">
+                <a href="" ng-class="{'on': tab == 1}"  ng-click="setTab(1)">报价机构</a><a href="" ng-class="{'on': tab == 2}" ng-click="setTab(2)">票源信息</a>
+            </div>
+            <div class="bd">
+                <div class="con1" ng-if="tab==1">
+                    <ul ng-repeat="item in listData">
+                        <li ng-click="detail(item)">机构名称：  {{item.collection_enterprise_name}} <a href="" class="addr">{{item.collection_enterprise_address}}</a></li>
+                    </ul>
+                    <div ng-if="is_vis && listData.length == 0" class="hpxWu">
+                        暂无关注的报价机构！
+                    </div>
+                </div>
+                <div class="con2 hot" ng-if="tab==2">
+                    <!--ui-sref="app.myReleaseDetail({myReleaseBillId:item.collection_bill_id})"-->
+                    <div class="item" ng-repeat="item in billListData" ng-click="myFollow(item)">
+                        <div class="hot-title">
+                            <a href="">
+                                <span class="addr">{{item.product_location_province}}</span>
+                            </a>
+                        </div>
+                        <div class="con">
+                            <!--<a href="">-->
+                                <span style="background-color:#ff6a00;color:#fff;padding:3px;font-size:0.22rem;">{{item.bill_type_name}}</span>
+                                <span style="font-size:0.24rem;">票面金额：<i>¥ <b>{{(item.bill_sum_price / 10000).toFixed(2)}}万</b></i></span>
+                                <p>承兑机构 ：{{item.acceptor_type_name}}</p>
+                                <p>到期日：{{item.deadline_time | date:'yyyy-MM-dd'}}<time>{{item.offsetDays}}天</time></p>
+                                <!--<span class="btn1">{{item.bill_status_name}}</span>-->
+                                <span class="btn1">我要竞价</span>
+                            <!--</a>-->
+                        </div>
+                        <div class="operate">
+                            <a href="" class="btn-cancle" ng-click="followBill(item.collection_bill_id, 0)">取消收藏</a>
+                        </div>
+                    </div>
+                    <div ng-if="is_vis && billListData.length == 0" class="hpxWu">
+                        暂无关注的票源信息！
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

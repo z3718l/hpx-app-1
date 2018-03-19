@@ -1,0 +1,1 @@
+$(function(){"use strict";!function(){$(".btn-online-service").on("click",function(e){e.preventDefault(),$(".alert-online-service").fadeIn(300)}),$(".alert-online-service .close").on("click",function(e){e.preventDefault(),$(".alert-online-service").fadeOut("300")})}()});

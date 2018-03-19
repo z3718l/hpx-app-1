@@ -1,0 +1,148 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        贴现计算器
+    </ion-nav-title>
+    <ion-content>
+        <div class="page41">
+            <div id="tabBox1" class="tabBox41">
+                <div class="hd">
+                    <ul>
+                        <li ng-class="{'on': tab == 1}"><a href="javascript:void(0)" ng-click="setTab(1)">按利率计算</a></li>
+                        <li ng-class="{'on': tab == 2}"><a href="javascript:void(0)" ng-click="setTab(2)">每10万计算</a></li>
+                    </ul>
+                </div>
+                <div class="bd" id="tabBox1-bd">
+                    <!-- 按利率计算 -->
+                    <div class="con" ng-if="tab==1">
+                        <div>
+                            <div class="part41-1">
+                                <ul class="calc">
+                                    <li style="width:40%;"><i>*</i>票面金额</li>
+                                    <li style="position:relative;padding-left: 13px;width:60%;"><input type="text" style="height: 0.87rem;text-align:center;width:2.6rem;" ng-model="model.denomination" placeholder="请输入票面金额" class="i1" ng-change="denominationChange()" max="999999.999999"><span style="position:absolute;width:17%;top:0px;right:4px;">万元</span></li>
+                                    <li style="width:40%;"><i>*</i>利率</li>
+                                    <li class="left" style="width:60%;">
+                                        <!--方便测试先注释掉了利率选择框-->
+                                        <select name="" id="" class="s1 interest" ng-model="model.interest_type" ng-options="it.type as it.name for it in interestTypes" ng-change="changeType(model.interest_type)"></select>
+                                        
+                                        <input type="number" style="width:2rem;" min="0" ng-model="model.interest" placeholder="请输入利率">
+                                        {{model.interest_type == 'month' ? '‰':'%'}}
+                                    </li>
+                                    <li style="width:40%;"><i>*</i>贴现日</li>
+                                    <li class="left" style="width:60%;"><!--<datetimepicker data-ng-model="model.start_time" data-datetimepicker-config="{ dropdownSelector: '#dropdown0', minView: 'day', modelType: 'YYYY-MM-DD' }" data-on-set-time="onTimeSet(newDate, oldDate, 'start_time')" />-->
+
+                                    <input value="" class="date" name="appDate" id="appDate1" type="date" ng-model="model.start_date" placeholder="点击选择日期"><p ng-if="!model.start_date" class="p_date">点击选择时期</p><!--{{model.start_time_tip}}--></li>
+                                    
+                                    <li style="width:40%;"><i>*</i>到期日</li>
+                                    <li class="left" style="width:60%;"><input value="" class="date" name="appDate" id="appDate2" type="date" ng-model="model.end_date" placeholder="点击选择日期"><p ng-if="!model.end_date" class="p_date">点击选择时期</p><!--{{model.end_time_tip}}--></li>
+                                    <li style="width:40%;">票据类型</li>
+                                    <li class="center" style="width:60%;">
+                                        <select name="" class="billType" id="" ng-model="model.bill_type" ng-options="bt.type as bt.name for bt in billTypes" ng-change="changeType(model.bill_type)"></select>
+                                    </li>
+                                    <li style="width:40%;">手续费</li>
+                                    <!--13px-->
+                                    <li style="width:60%;"><input type="number" min="0" ng-model="model.every_plus" style="width:3.5rem;" placeholder="请输入每10万加手续费" class="i2"><span>元</span></li>
+                                    <li style="width:40%;">查询及划款费</li>
+                                    <li style="width:60%;"><input type="number" min="0" ng-model="model.commission" style="width:3rem;" placeholder="请输入金额" class="i3"><span>元</span></li>
+                                </ul>
+                                <div class="operate">
+                                    <input type="reset" ng-click="clear();" value="清空">
+                                    <input type="submit" ng-click="calcuInterest()" value="计算">
+                                </div>
+                            </div>
+                            <div class="part41-2">
+                                <ul>
+                                    <li class="li1">调整天数</li>
+                                    <li class="li2"><i ng-bind="interestResult.adjust_day"></i>天</li>
+                                    <li class="li3 b"></li>
+                                    <li class="li1">计息天数</li>
+                                    <li class="li2"><i ng-bind="interestResult.day"></i>天</li>
+                                    <li class="li3 b"></li>
+                                    <li class="li1">每10万贴息</li>
+                                    <li class="li2"><i ng-bind="interestResult.every_plus_amount"></i>元</li>
+                                    <li class="li3"><a href="" class="btn" ng-click="openCalcModal(interestResult.every_plus_amount)">再计算</a></li>
+                                    <li class="li1">贴现利息</li>
+                                    <li class="li2"><i ng-bind="interestResult.discount_interest"></i>元</li>
+                                    <li class="li3"><a href="" class="btn" ng-click="openCalcModal(interestResult.discount_interest)">再计算</a></li>
+                                    <li class="li1">贴现金额</li>
+                                    <li class="li2"><i ng-bind="interestResult.discount_amount"></i>元</li>
+                                    <li class="li3"><a href="" class="btn" ng-click="openCalcModal(interestResult.discount_amount)">再计算</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /按利率计算 -->
+                    <!-- 每10万计算 -->
+                    <div class="con" ng-if="tab==2">
+                        <div>
+                            <div class="part41-1">
+                                <ul>
+                                    <li style="width:40%;"><i>*</i>票面金额</li>
+                                    <li style="position:relative;padding-left: 13px;width:60%;"><input type="text" style="height: 0.87rem;text-align:center;width:2.6rem;" ng-model="model.denomination" placeholder="请输入票面金额" class="i1" ng-change="denominationChange()" max="999999.999999"><span style="position:absolute;width:17%;top:0px;right:4px;">万元</span></li>
+                                    <li style="width:40%;"><i>*</i>每10万贴息</li>
+                                    <li style="width:60%;">
+                                        <input type="number" min="0" style="width:3.3rem;" ng-model="model.every_plus" placeholder="请输入每10万贴息" class="i2">
+                                        元
+                                    </li>
+                                    <li style="width:40%;">贴现日</li>
+                                    <li class="left" style="width:60%;"><input value="" ng-model="model.many_start_date" class="date" name="appDate" id="appDate3" type="date" placeholder="点击选择日期"><p ng-if="!model.many_start_date" class="p_date">点击选择时期</p><!--{{model.many_start_time_tip}}--></li>
+                                    <li style="width:40%;">到期日</li>
+                                    <li class="left" style="width:60%;"><input value="" ng-model="model.many_end_date" class="date" name="appDate" id="appDate4" type="date" placeholder="点击选择日期"><p ng-if="!model.many_end_date" class="p_date">点击选择时期</p><!--{{model.many_end_time_tip}}--></li>
+                                    <li style="width:40%;">票据类型</li>
+                                    <li class="center" style="width:60%;">
+                                        <select name="" class="billType" id="" ng-model="model.bill_type" ng-options="bt.type as bt.name for bt in billTypes" ng-change="changeType(model.bill_type)"></select>
+                                    </li>
+                                </ul>
+                                <div class="operate">
+                                    <input type="reset" ng-click="clear()" value="清空">
+                                    <input type="submit" ng-click="calcuInterest('ten')" value="计算">
+                                </div>
+                            </div>
+                            <div class="part41-2">
+                                <ul>
+                                    <li class="li1">调整天数</li>
+                                    <li class="li2"><i ng-bind="interestResult.adjust_day"></i>天</li>
+                                    <li class="li3 b"></li>
+                                    <li class="li1">计息天数</li>
+                                    <li class="li2"><i ng-bind="interestResult.day"></i>天</li>
+                                    <li class="li3 b"></li>
+                                    <li class="li1">利率</li>
+                                    <li class="li2 li2-select">
+                                        <select style="height:0.6rem" name="" id="" class="interest" ng-model="model.interest_type" ng-options="it.type as it.name for it in interestTypes" ng-change="changeType(model.interest_type)"></select>
+                                        <i ng-bind="interestResult['interest_'+model.interest_type]"></i>{{model.interest_type == 'month' ? '‰':'%'}}
+                                    </li>
+                                    <li class="li3"><a href="" class="btn" ng-click="openCalcModal(interestResult['interest_'+model.interest_type])">再计算</a></li>
+                                    <!-- 未输入时将上面几项去掉即可 -->
+
+                                    <li class="li1">贴现利息</li>
+                                    <li class="li2"><i ng-bind="interestResult.discount_interest"></i>元</li>
+                                    <li class="li3"><a href="" class="btn" ng-click="openCalcModal(interestResult.discount_interest)">再计算</a></li>
+                                    <li class="li1">贴现金额</li>
+                                    <li class="li2"><i ng-bind="interestResult.discount_amount"></i>元</li>
+                                    <li class="li3"><a href="" class="btn" ng-click="openCalcModal(interestResult.discount_amount)">再计算</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /每10万计算 -->
+                </div>
+            </div>
+        </div>
+        <!-- 图片放大页面弹框 -->
+        <script id="calc.html" type="text/ng-template">
+            <ion-modal-view hide-nav-bar="true" class="calculator">
+                <!--<ion-header-bar>
+                    <header>
+                        <h3>贴现计算器</h3>
+                    </header>
+                </ion-header-bar>-->
+                    <div ng-style="{'height': calcHeight}">
+                        <textarea style="border-radius: 0;" disabled="disabled" ng-model="result" class="result"></textarea>
+                        <div ng-repeat="item in data" class="row">
+                            <div class="col" ng-repeat="a in item" ng-class="showClass($index,a)" ng-click="showResult(a)">{{ a }}</div>
+                        </div>
+                    </div>
+            </ion-modal-view>
+        </script>
+
+    </ion-content>
+</ion-view>

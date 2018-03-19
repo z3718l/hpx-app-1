@@ -1,0 +1,22 @@
+﻿
+<ion-view cache-view="false">
+    <ion-nav-title>
+        修改密码
+    </ion-nav-title>
+    <ion-content>
+
+
+        <div class="page-modify-pwd">
+            <ul>
+                <li><span>旧密码：</span><input type="password" ng-model="model.old_password" name="" id="" placeholder="请输入旧密码"></li>
+                <li><span>新密码：</span><input type="password" ng-model="model.new_password" name="" id="" placeholder="请输入新密码"></li>
+                <li><span>再次输入新密码：</span><input type="password" ng-model="model.new_password2" name="" id="" placeholder="请再次输入新密码"></li>
+            </ul>
+            <div class="g-single-submit">
+                <input type="submit" ng-click="submit()" value="确认提交">
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>

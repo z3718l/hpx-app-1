@@ -1,0 +1,1 @@
+$(function(){"use strict";!function(){$(".page12-1 .part1 li em").on("click",function(n){n.preventDefault(),$(this).addClass("on"),$(this).siblings().removeClass("on")})}()});

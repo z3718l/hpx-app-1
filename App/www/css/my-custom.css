@@ -1,0 +1,52 @@
+﻿/*.hpxModalZ .popup-buttons{
+    width: 94% !important;
+    background-color: #fff;
+}*/
+/*.hpxModalZ .popup-body{
+    margin-top:4px !important;
+}*/
+/*.hpxModalZ .popup{
+    width:95% !important;
+}*/
+/*.hpxModalZ .popup-buttons .button{
+    margin-left:7% !important;
+}*/
+/*.hpxModalZ .popup-buttons .button{
+    font-size:24px;
+    border: 1px solid #ff6a00;
+    height: 52px;
+    color: #ff6a00;
+    border-radius: 6px;
+    font-weight: 100;
+    -webkit-flex:-1;
+    background-color: #fff;
+}*/
+/*.hpxModalZ .button{
+    padding:0;
+}*/
+/*.hpxModalZ .popup-buttons .button:last-child{
+    font-size:24px;
+    border-radius: 6px;
+    font-weight: 100;
+}*/
+/*.hpxModalZ .button.button-positive{
+    background-color:#ff6a00;
+    color:#fff;
+    width:50%;
+}*/
+/*.hpxModalZ .popup-body{
+    text-align:left !important;
+}*/
+
+/*.hpxModalZ .popup-container .popup{
+    border-radius:8px;
+}*/
+
+.hpxcc b{
+    font-size:28px;
+}
+
+.hpxT .slider-slide{
+    height:90%;
+}
+

@@ -1,0 +1,74 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" style="font-size: 0.33rem;" menu-toggle="right" ng-click="hpxColse()">关闭</button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        联系人信息
+    </ion-nav-title>
+    <ion-content>        
+        <!-- 已经填写 -->
+        <div class="page16-details" ng-if="model.is_verified != 0">
+            <ul class="g-icon-list-link">
+                <li><img src="images/icon161-1.png" alt="" class="icon">手机号码<span class="r" ng-bind="model.phone_number"></span></li>
+                <li><img src="images/icon161-3.png" alt="" class="icon">联系人姓名<span class="r" ng-bind="model.customer_name"></span></li>
+                <li><img src="images/icon161-2.png" alt="" class="icon">身份证号<span class="r" ng-bind="model.id_number"></span></li>
+                <!--<li><img src="images/icon161-3.png" alt="" class="icon">性别<span class="r" ng-bind="model.sex"></span></li>-->
+                <!--
+                    <li><img src="images/icon161-2.png" alt="" class="icon">企业名称<span class="r" ng-bind="model.enterprise_name"></span></li>
+                -->
+                <!--<li><img src="images/icon161-2.png" alt="" class="icon">身份证号<span class="r" ng-bind="model.id_number"></span></li>-->
+                <!--
+                    <li><img src="images/icon161-3.png" alt="" class="icon">联系人<span class="r" ng-bind="model.customer_name"></span></li>
+                -->
+                <li><span style="float:left;margin-right:5%;"><img src="images/icon161-4.png" alt="" class="icon">联系地址</span><div class="r1" style="text-align:right;">{{ model.trade_location_province }} <span ng-if="model.trade_location_city && location_city != 1">{{ model.trade_location_city }}</span> {{ model.trade_location }} {{ model.contact_address }}</div></li>
+            </ul>
+            <div style="clear:both;"></div>
+            <div class="g-single-submit" ng-if="!isViewEide">
+                <input type="submit" ng-click="modified()" value="修改">
+            </div>
+        </div>                
+        <!-- 尚未填写 -->
+        <div class="page-modify-contact" ng-if="model.is_verified == 0">
+            <ul>
+                <li><span><p style="color: #f55a14;float:left">*</p>手机号码</span><input type="text" ng-disabled="filter.changed" ng-model="model.phone_number" placeholder="请输入联系人手机号"></li>
+                <li><span><p style="color: #f55a14;float:left">*</p>联系人</span><input type="text" ng-model="model.customer_name" placeholder="请输入联系人姓名" required></li>
+                <!-- <li><span>手机号</span><em>13722888888</em></li> -->
+                <li><span><p style="color: #f55a14;float:left">*</p>身份证号</span><input type="text" ng-model="model.id_number" placeholder="请输入联系人身份证" required></li>
+                <li><span><p style="color: #f55a14;float:left">*</p>联系地址</span>
+                    <select ng-model="model.trade_location_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()" placeholder="省/直辖市" style="background-color:#fff;">
+                        <option value="">省/直辖市</option>
+                    </select>
+                    <select ng-class="{'tradCity': !filter.tradCity}" ng-if="model.trade_location_province_id !=1 || model.trade_location_province_id != 20 || model.trade_location_province_id != 860 || model.trade_location_province_id != 2462" ng-model="model.trade_location_city_id" ng-options="item.id as item.address_name for item in CityData" ng-change="cityChange()" placeholder="市" style="background-color:#fff;">
+                        <option value="">市</option>
+                    </select>
+                    <select ng-model="model.trade_location_id" ng-options="item.id as item.address_name for item in AddressData" placeholder="区/县" style="background-color:#fff;">
+                        <option value="">区/县</option>
+                    </select>
+                </li>
+                <li><span>详情地址</span><input type="text" ng-model="model.contact_address" placeholder="请输入详细交易地址"></li>
+            </ul>
+            <div class="g-single-submit">
+                <input type="submit" ng-click="save()" value="确认提交">
+            </div>
+        </div>
+        <!--提示信息-->
+        <!--<div class="alert-bind-info" ng-class="{'show': filter.tip}">
+            <div class="box">
+                <h3>温馨提示</h3>
+                <p>已完善业务授权信息，请进行下一步账户绑定</p>
+                <ul>
+                    <li class="on"><i>1</i>编辑联系人信息</li>
+                    <li><i>2</i>机构认证</li>
+                    <li><i>3</i>业务授权</li>
+                    <li><i>4</i>账户绑定</li>
+                </ul>
+                <p class="tips">注：进行电票交易须完成四步信息填写，如无需电票交易则填写第一、二步信息即可。</p>
+                <div class="operate">
+                    <a href="" class="btn-cancle" ui-sref="app.user">取消</a><a href="" class="btn-next" ui-sref="app.accredit">进入下一步</a>
+                </div>
+            </div>
+        </div>-->
+        
+
+    </ion-content>
+</ion-view>

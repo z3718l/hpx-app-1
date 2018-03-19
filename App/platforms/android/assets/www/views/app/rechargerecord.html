@@ -1,0 +1,50 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        充值记录
+    </ion-nav-title>
+    <ion-content>
+            <ion-refresher on-refresh="doRefresh()"
+                           pulling-text="下拉刷新充值记录……"
+                           refreshing-text="获取充值记录中……"
+                           spinner="ios">
+            </ion-refresher>
+            <!--<header>
+                <a href="" class="back"></a>
+                <h3>充值记录</h3>
+            </header>-->
+            <!--<div class="h40"></div>-->
+            <div ng-if="listData == ''" style="width:80%;height:1rem;line-height:1rem;text-align:center;font-size:18px;color:#ccc;border:1px #ccc solid;border-radius:5px;margin: .5rem auto">暂无充值</div>
+            <ion-list>
+                <div class="page19-1">
+                    <div class="item" ng-repeat="item in listData">
+                        <p>通过支付宝向汇票线平台充值{{item.change_price | currency: '￥'}}元</p>
+                        <p class="time">{{item.change_time | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+                    </div>
+                    <div ng-if="is_vis && listData.length == 0" class="hpxWu">
+                        暂无充值记录！
+                    </div>
+                   <!--<div class="item">
+                      <p>通过支付宝向汇票线平台充值5000元</p>
+                      <p class="time">2017.1.20}</p>
+                  </div>-->
+
+
+                    <!--<div class="item" ng-repeat="item in chargeRecordData" ng-if="item.change_type == 0">
+                        <p>通过支付宝向汇票线平台消费元</p>
+                        <p class="time"></p>
+                    </div>-->
+                </div>
+            </ion-list>
+
+            <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+            </ion-infinite-scroll>
+
+        <!--<div class="page19-1">
+            <div class="item">
+                <p>通过支付宝向汇票线平台充值500元XXXXXX</p>
+                <p class="time">2016-12-14  10:01</p>
+                
+            </div>
+        </div>-->
+    </ion-content>
+</ion-view>

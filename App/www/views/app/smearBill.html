@@ -1,0 +1,30 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        票面涂抹
+    </ion-nav-title>
+    <ion-content>
+        <div class="page51">
+            <div class="part1">
+                涂抹画笔<input type="range" min="1" max="20" ng-model="setting.size" class="range">
+            </div>
+            <div class="part2">
+                <a href="javascript:;" class="btn1" ng-click="rotate()">图片旋转</a>
+                <a href="javascript:;" class="btn2" ng-click="cancel()">撤销操作</a>
+            </div>
+            <!-- 图片框默认高度为7.5rem，可手动修改 -->
+            <div id="cv" class="img-box" style="zoom: 0.5">
+                <canvas style="display: block; margin: 0 auto;" id="canvas">
+                    您的浏览器暂不支持canvas
+                </canvas>
+            </div>
+            <div class="btn-upload" ng-click="initImage()">
+                <span>选取<br>图片</span>
+            </div>
+            <div class="part5">
+                <a href="javascript:;" class="btn3" ng-click="share()">图片分享</a>
+                <a href="javascript:;" class="btn4" ng-click="save()">图片保存</a>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

@@ -1,0 +1,95 @@
+﻿
+<ion-view cache-view="false">
+    <ion-nav-title>
+        我要出票
+    </ion-nav-title>
+    <ion-content>
+        <div class="page11-1" style="background-color: #f2f2f2;">
+            <div class="part1"style="padding-bottom:0px">
+                <div class="g-line-title"><i></i>基本信息<span style="color:#f00;">（现票卖断：必须要票面；预约出票：票还没在手，可不用票面）</span></div>             
+                <ul class="con1" style="padding-bottom:0px;margin-top: 10%;">
+                    <!--<li class="tips" style="width:68%;margin-left:12%;">（现票卖断：必须要票面；预约出票：票还没在手，可不用票面）</li>-->
+                    <li><span class="hpxXiu"><span style="color: #f55a14">*</span><span>票据类型：</span></span><a href="" ng-if="identity.can_sell_electronic_bill == 1 || identity.is_verified >= 3 || identity.is_verified == 1" ng-click="choiceEBillType()" ng-class="{true: 'on', false: ''}[model.bill_type_id==101]">电票</a><a ng-if="identity.can_sell_paper_bill == 1 || identity.enterprise_id==0" ng-click="choicePBillType()" ng-class="{true: 'on', false: ''}[model.bill_type_id==102]" >纸票</a></li>
+                    <li class="fs"><span class="hpxXiu"><span style="color: #f55a14">*</span> <span>交易方式：</span></span><a ng-click="choiceYTradeType()"  ng-class="{true: 'on', false: ''}[model.trade_type_code==701]">现票卖断</a><a ng-click="choiceNTradeType()"  ng-class="{true: 'on', false: ''}[model.trade_type_code==702]">预约出票</a></li>
+                    
+                    <li><span style="display:inline-block;width:35%;text-align:right;"><span style="color: #f55a14">*</span> <span>票面金额：</span></span><input type="number" id="price" style="display:inline-block;width:6em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" ng-model="model.bill_sum_price">[元]</li>
+                    <li ng-if="model.trade_type_code == 702"><span style="display:inline-block;width:35%;text-align:right;margin-left:-1.1%;"><span style="color: #f55a14">*</span><span>承兑机构：</span></span>
+                        <select style="display:inline-block;width:6em;background-color:#fff;" name="" ng-model="model.acceptor_type_id" ng-options="item.code as item.constant_name for item in acceptorTypeData">
+                        </select>
+                    </li>
+                    <li ng-if="model.trade_type_code == 702"><span style="display:inline-block;width:35%;text-align:right;"><span style="color: #f55a14">*</span><span>预约交易日期：</span></span><input type="date" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:10em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;background-color:#fff;" ng-model="model.product_deadline_time"/></li>
+                    <li ng-if="model.bill_type_id != 101"><span style="display:inline-block;width:35%;text-align:right;"><span style="color: #f55a14">*</span>交易地址：</span>
+                        
+                        <select ng-model="model.product_province_id" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:10em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;margin-left:-1.1%;background-color:#fff;" name="" ng-options="item.id as item.address_name for item in provinceData" ng-change="provinceChange()">
+                            <option value="">省(直辖市)</option>
+                        </select>
+                        <select ng-model="model.product_location_id" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:10em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;margin-left:35%;background-color:#fff;" name="" ng-options="item.id as item.address_name for item in cityData">
+                            <option value="">市</option>
+                        </select>
+                    </li>
+                    <li ng-if="model.trade_type_code == 702 && filter.perfect"><span style="display:inline-block;width:35%;text-align:right;"><span style="color: #f55a14">*</span><span>承兑人全称：</span></span><input type="text" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:10em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" ng-model="model.acceptor_name" /></li>
+                    <li ng-if="model.trade_type_code == 702 && filter.perfect"><span style="display:inline-block;width:35%;text-align:right;"><span style="color: #f55a14">*</span><span>票据号：</span></span><input type="text" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:10em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" ng-model="model.bill_number" /></li>
+                    <li>
+                        <span style="display:inline-block;width:35%;text-align:right;" ng-if="model.trade_type_code == 701">期望利率：</span><input ng-if="model.trade_type_code == 701" type="number" id="price" style="display:inline-block;width:6em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" ng-model="model.bill_rate">
+                        <span style="display:inline-block;width:35%;text-align:right;" ng-if="model.trade_type_code == 702">每十万期望贴息：</span><input ng-if="model.trade_type_code == 702" type="number" id="price" style="display:inline-block;width:6em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" ng-model="model.bill_rate">
+
+                        <span ng-if="model.bill_type_id==101 && model.trade_type_code == 701">%</span>
+                        <span ng-if="model.bill_type_id==102 && model.trade_type_code == 701">‰</span>
+                        <span ng-if="model.trade_type_code == 702">[元]</span>
+                    </li>
+                    <li ng-if="model.trade_type_code == 701" style="padding-bottom: 0.25rem;"><span style="display:inline-block;width:35%;text-align:right;">每十万加：</span><input type="number" id="price" style="display:inline-block;width:6em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" ng-model="model.bill_every_plus">[元]</li>
+                    <li style="padding-bottom: 0.25rem;"><span style="display:inline-block;width:35%;text-align:right;">期望贴现额：</span><input type="number" id="price" style="display:inline-block;width:6em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" ng-model="model.bill_deal_price">[元]</li>
+                </ul>
+            </div>
+            <div class="part2">
+                <div class="g-line-title"><i></i>上传汇票</div>
+                <div class="con2">
+                    <div class="upload" ng-click="takePhoto(0)" ng-if="model.bill_front_photo_path==''">
+                        <span>点击正面上传</span>
+                    </div>
+                    <div class="uploadimg" ng-if="model.bill_front_photo_path != ''" ng-click="takePhoto(0)" ng-disabled="isView && imgBillF" style="position:relative;">
+                        <img ng-if="!model.bill_front_photo_path" style="width:100%;height:100%" src="images/hpx-001.png" alt="">
+                        <img ng-if="model.bill_front_photo_path" style="width:100%;height:100%" src="{{model.bill_front_photo_path}}" alt="">
+                        <div ng-if="isView && imgBillF" class="imgLoadBills imgBillF">正在上传，请等待！</div>
+                    </div>
+                    <div class="operate">
+                        <a ng-click="removeFront()" class="btn-delete"></a>
+                        <a ng-click="openImgMagnifyModal(model.bill_front_photo_path)" class="btn-magnifier"></a>
+                    </div>
+                    <div class="upload" ng-click="takePhoto(1)" ng-if="model.bill_back_photo_path == ''">
+                        <span>点击反面上传</span>
+                    </div>
+                    <div class="uploadimg" ng-if="model.bill_back_photo_path != ''" ng-click="takePhoto(1)" ng-disabled="isView && imgBillB" style="position:relative;">
+                        <img ng-if="!model.bill_back_photo_path" style="width:100%;height:100%" src="images/hpx-002.png" alt="">
+                        <img ng-if="model.bill_back_photo_path" style="width:100%;height:100%" src="{{model.bill_back_photo_path}}" alt="">
+                        <div ng-if="isView && imgBillB" class="imgLoadBills imgBillF">正在上传，请等待！</div>
+                    </div>
+                    <div class="operate">
+                        <a ng-click="removeBack()" class="btn-delete"></a>
+                        <a ng-click="openImgMagnifyModal(model.bill_back_photo_path)" class="btn-magnifier"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="part3">
+                <div class="g-line-title"><i></i>备注说明</div>
+                <div class="con3">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="如有其它票面信息的特殊说明或需求，可在此处填写" ng-model="model.description"></textarea>
+                    <input ng-if="!model.id" style="margin-left:34%;" type="submit" value="马上发布" ng-click="save()">
+                    <input ng-if="model.id" style="margin-left:34%;" type="submit" value="提交" ng-click="save()">
+                </div>
+            </div>
+        </div>
+        <!-- 图片放大页面弹框 -->
+        <script id="imgMagnify.html" type="text/ng-template">
+            <ion-modal-view hide-nav-bar="true">
+                <ion-content class="imgMagnify" ng-click="closeImgMagnifyModal()">
+                    <ion-scroll class="imgMagnify" zooming="true" min-zoom="0.5" max-zoom="3" direction="xy" scrollbar-x="false" scrollbar-y="false" has-bouncing="true" overflow-scroll="false" style="width: 100%; height:100%;">
+                        <div class="imgMagnify">
+                            <img ng-class="{rotate:rotate90}" src="{{img_path}}" />
+                        </div>
+                    </ion-scroll>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

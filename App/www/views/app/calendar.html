@@ -1,0 +1,112 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        开票日历
+    </ion-nav-title>
+    <ion-content>
+        <div class="page47">
+            <div id="tabBox1" class="tabBox47">
+                <div class="hd">
+                    <ul>
+                        <li ng-class="{'on': tab == 1}"><a href="javascript:void(0)" ng-click="setTab(1);refresh(102)">纸票</a></li>
+                        <li ng-class="{'on': tab == 2}">
+                            <a href="javascript:void(0)" ng-click="setTab(2);refresh(101)">电票</a>
+                            <div class="page47-3">
+                                <span ng-class="{'on': tab1 == 1}" ng-click="setTab1(1); refreshCycle(6)">半年期</span><span ng-class="{'on': tab1 == 2}" ng-click="setTab1(2); refreshCycle(12)">一年期</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bd" id="tabBox1-bd">
+                    <!-- 纸票 -->
+                    <div class="con" ng-if="tab==1">
+                        <div>
+                            <div class="page47-1">
+                                <select name="" id="" ng-model="model.year" ng-options="item as item + '年' for item in allYears" ng-change="setYear(model.year);">
+                                </select>
+                                <div class="month">
+                                    <a href="" class="prev" ng-click="setMonth(model.month>1?model.month-1:model.month)"></a>
+                                    <span>
+                                        <select name="" id="" ng-model="model.month" ng-options="item as item + '月' for item in allMonths" ng-change="setMonth(model.month)"></select>
+                                    </span>
+                                    <a href="" class="next"  ng-click="setMonth(model.month<12?model.month+1:model.month)"></a>
+                                </div>
+                                <a href="" class="btn-back" ng-click="reset()">返回今天</a>
+                            </div>
+                            <div class="page47-date">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>周一</th>
+                                        <th>周二</th>
+                                        <th>周三</th>
+                                        <th>周四</th>
+                                        <th>周五</th>
+                                        <th class="t6">周六</th>
+                                        <th class="t7">周日</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-if="item[0].week_name || $index==0" ng-repeat="item in calendarResult">
+                                            <td ng-class="{'on': one.day==todayStr}" ng-repeat="one in item">
+                                                <span ng-class="{true: 't7', false: ''}[one.day_status=='休息']">
+                                                    {{one.day | limitTo:-2}}
+
+                                                    <i>{{one.day_status=='工作日'?one.bill_calendar_days+"天":one.bill_calendar_days?"休":""}}</i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /纸票 -->
+                    <!-- 电票 -->
+                    <div class="con" ng-if="tab==2">
+                        <div>
+
+                            <div class="page47-1">
+                                <select name="" id="" ng-model="model.year" ng-options="item as item + '年' for item in allYears" ng-change="setYear(model.year);"></select>
+                                <div class="month">
+                                    <a href="" class="prev" ng-click="setMonth(model.month>1?model.month-1:model.month)"></a>
+                                    <span>
+                                        <select name="" id="" ng-model="model.month" ng-options="item as item + '月' for item in allMonths" ng-change="setMonth(model.month)"></select>
+                                    </span>
+                                    <a href="" class="next" ng-click="setMonth(model.month<12?model.month+1:model.month)"></a>
+                                </div>
+                                <a href="" class="btn-back" ng-click="reset()">返回今天</a>
+                            </div>
+                            <div class="page47-date">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>周一</th>
+                                            <th>周二</th>
+                                            <th>周三</th>
+                                            <th>周四</th>
+                                            <th>周五</th>
+                                            <th class="t6">周六</th>
+                                            <th class="t7">周日</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-if="item[0].week_name || $index==0" ng-repeat="item in calendarResult">
+                                            <td ng-class="{'on': one.day==todayStr}" ng-repeat="one in item">
+                                                <span ng-class="{true: 't7', false: ''}[one.day_status=='休息']">
+                                                    {{one.day | limitTo:-2}}
+
+                                                    <i>{{one.day_status=='工作日'?one.bill_calendar_days+"天":one.bill_calendar_days?"休":""}}</i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /电票 -->
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

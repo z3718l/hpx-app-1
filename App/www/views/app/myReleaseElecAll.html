@@ -1,0 +1,60 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我的发布
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="g-my-publish">
+            <ul class="filter">
+                <li class="li1">
+                    <span>票据类型：</span>
+                    <em ng-class="{true: 'on', false: ''}[filter.choiceBillType==101]" ng-click="choiceEBillType()">电票</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.choiceBillType==102]" ng-click="choicePBillType()">纸票</em>
+                </li>
+                <li class="li2">
+                    <span>状态：</span>
+                    <em ng-if="filter.choiceBillType==101" ng-class="{true: 'on', false: ''}[filter.choiceStatus==880]" ng-click="choiceTradeStatusAll()">全部 {{numberModel.all_ele_number}}</em>
+                    <em ng-if="filter.choiceBillType==101" ng-class="{true: 'on', false: ''}[filter.choiceStatus==881]" ng-click="choiceTradeStatusCheck()">待审核 {{numberModel.all_ele_wait_number}}</em>
+                    <em ng-if="filter.choiceBillType==101" ng-class="{true: 'on', false: ''}[filter.choiceStatus==882]" ng-click="choiceTradeStatusPublish()">发布中 {{numberModel.all_ele_publish_number}}</em>
+                    <em ng-if="filter.choiceBillType==101" ng-class="{true: 'on', false: ''}[filter.choiceStatus==883]" ng-click="choiceTradeStatusTrade()">交易中 {{numberModel.all_ele_running_order_number}}</em>
+                    <em ng-if="filter.choiceBillType==101" ng-class="{true: 'on', false: ''}[filter.choiceStatus==884]" ng-click="choiceTradeStatusComplete()">交易完成 {{numberModel.all_ele_finished_order_number}}</em>
+                    <em ng-if="filter.choiceBillType==101" ng-class="{true: 'on', false: ''}[filter.choiceStatus==885]" ng-click="choiceTradeStatusFail()">交易关闭 {{numberModel.all_ele_failed_order_number}}</em>
+                    <em ng-if="filter.choiceBillType==102" ng-class="{true: 'on', false: ''}[filter.choiceStatus==880]" ng-click="choiceTradeStatusAll()">全部 {{numberModel.all_paper_number}}</em>
+                    <em ng-if="filter.choiceBillType==102" ng-class="{true: 'on', false: ''}[filter.choiceStatus==881]" ng-click="choiceTradeStatusCheck()">待审核 {{numberModel.all_paper_wait_number}}</em>
+                    <em ng-if="filter.choiceBillType==102" ng-class="{true: 'on', false: ''}[filter.choiceStatus==882]" ng-click="choiceTradeStatusPublish()">发布中 {{numberModel.all_paper_publish_number}}</em>
+                    <em ng-if="filter.choiceBillType==102" ng-class="{true: 'on', false: ''}[filter.choiceStatus==883]" ng-click="choiceTradeStatusTrade()">交易中 {{numberModel.all_paper_running_number}}</em>
+                    <em ng-if="filter.choiceBillType==102" ng-class="{true: 'on', false: ''}[filter.choiceStatus==884]" ng-click="choiceTradeStatusComplete()">交易完成 {{numberModel.all_paper_finished_number}}</em>
+                    <em ng-if="filter.choiceBillType==102" ng-class="{true: 'on', false: ''}[filter.choiceStatus==885]" ng-click="choiceTradeStatusFail()">交易关闭 {{numberModel.all_paper_failed_number}}</em>
+
+                </li>
+            </ul>
+
+            <div class="item" ng-repeat="item in listData">
+                <p>票据类型：{{item.bill_type_name}}<span>交易方式：{{item.trade_type_name}}{{item.order_type_name}}</span></p>
+                <p>票面金额：<i>{{item.bill_sum_price}}</i> 元</p>
+                <p ng-if="item.is_checked != -1">状态：<i>{{item.bill_status_name}}</i></p>
+                <p ng-if="item.is_checked == -1">状态：<i>{{item.check_result}}</i></p>
+                <p>承兑人全称：{{item.acceptor_name | limitTo: 6}}{{item.acceptor_name.length > 6 ? '...':''}}</p>
+                <p>发布日期：{{item.publishing_time}}</p>
+                <p>到期日：{{item.bill_deadline_time}}</p>
+                <p ng-if="item.trade_type_code == 702">预约交易日期：{{item.product_deadline_time | date:'yyyy-MM-dd'}}</p>
+                <div class="operate" ng-if="filter.choiceStatus==881 || filter.choiceStatus==882 || (filter.choiceStatus==880 && item.bill_status_code<804) && item.is_checked != -1"><a ui-sref="app.myReleaseDetail({myReleaseBillId: item.id, check: 1})" class="btn-details">详 细</a></div>
+                <div class="operate" ng-if="item.is_checked == -1 && item.bill_status_code<804"><a ng-click="hpxYuB(item)" class="btn-details">修 改</a></div>
+                <!--<div class="operate" ng-if="item.is_checked == -1 && item.bill_status_code<804 && item."><a ui-sref="app.drawBill({id:item.id})" class="btn-details">修 改</a></div>-->
+                <!--ui-sref="app.drawBill({id:item.id})"-->
+                <div class="operate" ng-if="filter.choiceStatus==880 && item.bill_status_code>=804 && item.bill_status_code<=816 && item.bill_status_code!=806 && item.bill_type_id==101 && item.is_checked != -1"><a ui-sref="app.myReleaseDetail({'myReleaseBillId': item.id, 'myReleaseOrderId': item.order_id, check: 1})" class="btn-details">详 细</a></div>
+                <div class="operate" ng-if="filter.choiceStatus==880 && item.bill_status_code==806 && item.bill_type_id==101 && item.is_checked != -1"><a ui-sref="app.myReleaseDetail({'myReleaseBillId': item.id, 'myReleaseOrderId': item.order_id, check: 1})" class="btn-details">背 书</a></div>
+                <div class="operate" ng-if="filter.choiceStatus==880 && item.bill_status_code>804 && item.bill_status_code<=816 && item.bill_type_id==102 && item.is_checked != -1"><a ui-sref="app.myReleaseDetail({'myReleaseBillId': item.id, check: 1})" class="btn-details">详 细</a></div>
+                <div class="operate" ng-if="(filter.choiceStatus==883 || filter.choiceStatus==884 || filter.choiceStatus==885) && item.bill_type_id==101 && item.bill_status_code!=806 && item.is_checked != -1"><a ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.id, check: 1})" class="btn-details">详 细</a></div>
+                <div class="operate" ng-if="(filter.choiceStatus==883 || filter.choiceStatus==884 || filter.choiceStatus==885) && item.bill_type_id==101 && item.bill_status_code==806 && item.is_checked != -1"><a ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.id, check: 1})" class="btn-details">背 书</a></div>
+                <div class="operate" ng-if="(filter.choiceStatus==883 || filter.choiceStatus==884 || filter.choiceStatus==885) && item.bill_type_id==102 && item.is_checked != -1"><a ui-sref="app.myReleaseDetail({'myReleaseBillId': item.id, check: 1})" class="btn-details">详 细</a></div>
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

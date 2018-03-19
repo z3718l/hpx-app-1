@@ -1,0 +1,40 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        机构报价详情--银电大票
+    </ion-nav-title>
+    <ion-content>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon btn-share" ui-sref="app.home"></button>
+        </ion-nav-buttons>
+        <div class="wrap">
+            <div class="g-storage">
+                <div class="g-line-title"><i></i>票据信息 <a href="" class="btn-storage">收藏此票据</a></div>
+            </div>
+            <ul class="g-list">
+                <li>票据号：<span class="r" ng-bind="model.publisher_id"></span></li>
+                <li>票据类型：<span class="r" ng-bind="model.bill_type_name"></span></li>
+                <li>票面金额（元）：￥<span class="r" ng-bind="model.bill_sum_price"></span></li>
+                <li>到期日：<span class="r" ng-bind="model.bill_deadline_time"></span></li>
+                <li>承兑人：<span class="r" ng-bind="model.receiver_name"></span></li>
+                <li>票据瑕疵：<span class="r" ng-bind="model.bill_flaw_names"></span></li>
+            </ul>
+            <ul class="g-img-box-lr g-mb2">
+                <li><img src="{{model.bill_front_photo_path}}" alt=""></li>
+                <li><img src="{{model.bill_back_photo_path}}" alt=""></li>
+            </ul>
+            <div class="part3 g-mb2">
+                <div class="g-line-title-pd"><i></i>交易信息</div>
+                <ul class="g-list">
+                    <li>期望利率：<span class="r" ng-bind="model.bill_rate"></span></li>
+                    <li>期望交易金额（元）：<span class="r" ng-bind="model.bill_deal_price"></span></li>
+                    <li>交易方式：<span class="r" ng-bind="model.trade_type_name"></span></li>
+                    <li>备注：<span class="r" ng-bind="model.description"></span></li>
+                </ul>
+            </div>
+            <div class="g-status">
+                状态： <span>交易完成</span>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

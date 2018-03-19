@@ -1,0 +1,128 @@
+﻿
+<ion-view cache-view="false">
+    <ion-nav-title>
+        选择城市
+    </ion-nav-title>
+    <ion-content>
+    <div class="page-search">
+        <div class="search-box">
+            <input type="text" placeholder="搜索">
+        </div>
+        <div class="part1">
+            <p>选择日期</p>
+            <input type="date">
+        </div>
+        <div class="part1">
+            <p>当前定位</p>
+            <a href="" class="btn1">上海<span>GPS定位</span></a>
+
+            <p>热门城市</p>
+            <div class="con1">
+                <a href="">全国</a>
+                <a href="">上海</a>
+                <a href="">北京</a>
+                <a href="">广州</a>
+                <a href="">深圳</a>
+                <a href="">杭州</a>
+            </div>
+        </div>
+        <div class="part2">
+            <div class="title">省份城市</div>
+        </div>
+    </div>
+    <div class="select-box">
+        <ul class="select-left">
+            <li ng-class="{'on': tab == 1}"  ng-click="setTab(1)">安徽</li>
+            <li ng-class="{'on': tab == 2}"  ng-click="setTab(2)">北京</li>
+            <li ng-class="{'on': tab == 3}"  ng-click="setTab(3)">福建</li>
+            <li ng-class="{'on': tab == 4}"  ng-click="setTab(4)">甘肃</li>
+            <li ng-class="{'on': tab == 5}"  ng-click="setTab(5)">广东</li>
+            <li ng-class="{'on': tab == 6}"  ng-click="setTab(6)">广西</li>
+        </ul>
+        <div class="select-right">
+            <!-- 安徽 -->
+            <ul class="con" ng-if="tab==1">
+                <li><a href="">安徽1</a></li>
+                <li><a href="">安徽2</a></li>
+                <li><a href="">安徽3</a></li>
+                <li><a href="">安徽4</a></li>
+                <li><a href="">安徽5</a></li>
+                <li><a href="">安徽6</a></li>
+                <li><a href="">安徽7</a></li>
+                <li><a href="">安徽8</a></li>
+                <li><a href="">安徽1</a></li>
+                <li><a href="">安徽2</a></li>
+                <li><a href="">安徽3</a></li>
+                <li><a href="">安徽4</a></li>
+                <li><a href="">安徽5</a></li>
+                <li><a href="">安徽6</a></li>
+                <li><a href="">安徽7</a></li>
+                <li><a href="">安徽8</a></li>
+                <li><a href="">安徽1</a></li>
+                <li><a href="">安徽2</a></li>
+                <li><a href="">安徽3</a></li>
+                <li><a href="">安徽4</a></li>
+                <li><a href="">安徽5</a></li>
+                <li><a href="">安徽6</a></li>
+                <li><a href="">安徽7</a></li>
+                <li><a href="">安徽8</a></li>
+            </ul>
+            <!-- 北京 -->
+            <ul class="con" ng-if="tab==2">
+                <li><a href="">北京1</a></li>
+                <li><a href="">北京2</a></li>
+                <li><a href="">北京3</a></li>
+                <li><a href="">北京4</a></li>
+                <li><a href="">北京5</a></li>
+                <li><a href="">北京6</a></li>
+                <li><a href="">北京7</a></li>
+                <li><a href="">北京8</a></li>
+            </ul>
+            <!-- 福建 -->
+            <ul class="con" ng-if="tab==3">
+                <li><a href="">福建1</a></li>
+                <li><a href="">福建2</a></li>
+                <li><a href="">福建3</a></li>
+                <li><a href="">福建4</a></li>
+                <li><a href="">福建5</a></li>
+                <li><a href="">福建6</a></li>
+                <li><a href="">福建7</a></li>
+                <li><a href="">福建8</a></li>
+            </ul>
+            <!-- 甘肃 -->
+            <ul class="con" ng-if="tab==4">
+                <li><a href="">甘肃1</a></li>
+                <li><a href="">甘肃2</a></li>
+                <li><a href="">甘肃3</a></li>
+                <li><a href="">甘肃4</a></li>
+                <li><a href="">甘肃5</a></li>
+                <li><a href="">甘肃6</a></li>
+                <li><a href="">甘肃7</a></li>
+                <li><a href="">甘肃8</a></li>
+            </ul>
+            <!-- 广东 -->
+            <ul class="con" ng-if="tab==5">
+                <li><a href="">广东1</a></li>
+                <li><a href="">广东2</a></li>
+                <li><a href="">广东3</a></li>
+                <li><a href="">广东4</a></li>
+                <li><a href="">广东5</a></li>
+                <li><a href="">广东6</a></li>
+                <li><a href="">广东7</a></li>
+                <li><a href="">广东8</a></li>
+            </ul>
+            <!-- 广西 -->
+            <ul class="con" ng-if="tab==6">
+                <li><a href="">广西1</a></li>
+                <li><a href="">广西2</a></li>
+                <li><a href="">广西3</a></li>
+                <li><a href="">广西4</a></li>
+                <li><a href="">广西5</a></li>
+                <li><a href="">广西6</a></li>
+                <li><a href="">广西7</a></li>
+                <li><a href="">广西8</a></li>
+            </ul>
+        </div>
+    </div>
+    </ion-content>
+</ion-view>

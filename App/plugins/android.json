@@ -1,0 +1,67 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-image-picker": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-qqsdk": {
+            "QQ_APP_ID": "1106027732",
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-wechat": {
+            "WECHATAPPID": "wx453fa39dde017d83",
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-weibosdk": {
+            "WEIBO_APP_ID": "1114521351",
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "org.devgeeks.Canvas2ImagePlugin": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-baidumaplocation": {
+            "ANDROID_KEY": "wMvum5rDBSYQN41zaGHtFefmcpjGWCEA",
+            "IOS_KEY": "ru0lmGVpMUheRFUIFEi0KuisIptB5iSV",
+            "IOS_LOCATION_DESC": "请点击'好'以允许访问。",
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-offbye-alipay": {
+            "PARTNER_ID": "2088421699339532",
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "io.cordova.hpx"
+        }
+    },
+    "dependent_plugins": {}
+}

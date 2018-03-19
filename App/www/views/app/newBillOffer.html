@@ -1,0 +1,528 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+       我要报价
+    </ion-nav-title>
+    <ion-content>
+        <div class="page73">
+            <div class="g-line-title"><i></i>报价信息</div>
+            <ul class="part1">
+                <li>
+                    <span>票据类型：</span>
+                    <em ng-class="{true: 'on', false: ''}[model.bill_style_id==202]" ng-click="choice202BillStye()">银电大票</em>
+                    <em ng-class="{true: 'on', false: ''}[model.bill_style_id==203]" ng-click="choice203BillStye()">银纸小票</em>
+                    <em ng-class="{true: 'on', false: ''}[model.bill_style_id==204]" ng-click="choice204BillStye()">银电小票</em>
+                    <em ng-class="{true: 'on', false: ''}[model.bill_style_id==205]" ng-click="choice205BillStye()">商票</em>
+                </li>
+                <li ng-if="model.bill_style_id==202">
+                    <span ng-if="model.bill_style_id==202">&nbsp;&nbsp;&nbsp;&nbsp;期限：</span>
+                    <em ng-if="model.bill_style_id==202" ng-class="{true: 'on', false: ''}[model.deadline_type_code==1701]" ng-click="choice1701DeadlineType()">不限</em>
+                    <em ng-if="model.bill_style_id==202" ng-class="{true: 'on', false: ''}[model.deadline_type_code==1702]" ng-click="choice1702DeadlineType()">足月</em>
+                    <em ng-if="model.bill_style_id==202" ng-class="{true: 'on', false: ''}[model.deadline_type_code==1703]" ng-click="choice1703DeadlineType()">不足月</em>
+                </li>
+                <li>
+                    <span ng-if="model.bill_style_id==202||model.bill_style_id==203||model.bill_style_id==204||model.bill_style_id==205">交易方式：</span>
+                    <em ng-if="model.bill_style_id==202||model.bill_style_id==203||model.bill_style_id==204||model.bill_style_id==205" ng-class="{true: 'on', false: ''}[model.trade_type_id==1801]" ng-click="choice1801TradeType()">买断</em>
+                    <em ng-if="model.bill_style_id==203" ng-class="{true: 'on', false: ''}[model.trade_type_id==1802]" ng-click="choice1802TradeType()">回复打款</em>
+                    <em ng-if="model.bill_style_id==202||model.bill_style_id==203||model.bill_style_id==204" ng-class="{true: 'on', false: ''}[model.trade_type_id==1803]" ng-click="choice1803TradeType()">直贴</em>
+                    <em ng-if="model.bill_style_id==205" ng-class="{true: 'on', false: ''}[model.trade_type_id==1804]" ng-click="choice1804TradeType()">回购</em>
+                </li>
+                <li ng-if="model.bill_style_id==205">
+                    <span ng-if="model.bill_style_id==205">贸易背景：</span>
+                    <em ng-if="model.bill_style_id==205" ng-class="{true: 'on', false: ''}[model.trade_background_code==1601]" ng-click="choice1601TradeBackground()">不限</em>
+                    <em ng-if="model.bill_style_id==205" ng-class="{true: 'on', false: ''}[model.trade_background_code==1602]" ng-click="choice1602TradeBackground()">真实</em>
+                    <em ng-if="model.bill_style_id==205" ng-class="{true: 'on', false: ''}[model.trade_background_code==1603]" ng-click="choice1603TradeBackground()">融资票</em>
+                </li>
+                <!--<li ng-if="model.bill_style_id==205">
+                    <span ng-if="model.bill_style_id==205">额度：</span>
+                    <em ng-if="model.bill_style_id==205" ng-class="{true: 'on', false: ''}[model.max_price_type==0]" ng-click="choice0MaxPriceType()">不限</em>
+                    <em ng-if="model.bill_style_id==205" ng-class="{true: 'on', false: ''}[model.max_price_type==1]" ng-click="choice1MaxPriceType()">具体额度</em><input ng-if="model.max_price_type==1" ng-model="model.max_price" type="number" style="display:inline-block;width:4em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;margin-top:.5em" />
+                </li>-->
+                <!--<li>
+                <span ng-if="model.bill_style_id==203||model.bill_style_id==204">承兑时间：</span>
+                <em ng-if="model.bill_style_id==204" ng-class="{true: 'on', false: ''}[filter.is360==true]" ng-click="choiceTIs360()">360天</em>
+                <em ng-if="model.bill_style_id==204" ng-class="{true: 'on', false: ''}[filter.is360==false]" ng-click="choiceFIs360()">非360天</em>
+                <em ng-if="model.bill_style_id==203" ng-class="{true: 'on', false: ''}[filter.is180==true]" ng-click="choiceTIs180()">180天</em>
+                <em ng-if="model.bill_style_id==203" ng-class="{true: 'on', false: ''}[filter.is180==false]" ng-click="choiceFIs180()">非180天</em>
+            </li>-->
+                <!--<li>
+                <span ng-if="model.bill_style_id==203||model.bill_style_id==204">票据面值:</span>
+                <em ng-if="model.bill_style_id==203||model.bill_style_id==204" ng-class="{true: 'on', false: ''}[filter.billPrice==1]" ng-click="choice1BillPrice()">100万以上</em>
+                <em ng-if="model.bill_style_id==203||model.bill_style_id==204" ng-class="{true: 'on', false: ''}[filter.billPrice==2]" ng-click="choice2BillPrice()">50万-100万</em>
+                <em ng-if="model.bill_style_id==203||model.bill_style_id==204" ng-class="{true: 'on', false: ''}[filter.billPrice==3]" ng-click="choice3BillPrice()">50万以下</em>
+            </li>-->
+            </ul>
+            <!--银电大票-->
+            <div class="title" ng-if="model.bill_style_id==202">承兑机构：</div>
+            <ul class="info2" ng-if="model.bill_style_id==202">
+                <li>国股:<input ng-model="model.offer_detail.offer_rate01" type="number">%</li>
+                <li class="tcenter">城商:<input type="number" ng-model="model.offer_detail.offer_rate02" >%</li>
+                <li class="tright">三农:<input type="number" ng-model="model.offer_detail.offer_rate03" >%</li>
+                <li>村镇:<input type="number" ng-model="model.offer_detail.offer_rate04" >%</li>
+                <li class="tcenter">外资:<input type="number" ng-model="model.offer_detail.offer_rate05" >%</li>
+                <li class="tright">财务:<input type="number" ng-model="model.offer_detail.offer_rate06" >%</li>
+            </ul>
+            <!--银电大票-->
+            <!-- 银电小票 -->
+            <div class="part2" ng-if="model.bill_style_id==203">
+                <div class="line"></div>
+                <div class="g-line-title" style="margin-left:6%;"><span style="color:#fff;background-color:#ff6a00;display:inline-block;padding-left:3px;padding-right:3px;">180天及以上</span></div>
+                <div class="info3" ng-class="{'info3-on on': filter.isType1}">
+                    <div class="hd" ng-click="filter.isType1 = !filter.isType1;">
+                        <span class="tr">承兑机构</span>
+                        <span>100万以上</span>
+                        <span>50万-100万</span>
+                        <span>50万以下</span>
+                        <a href="" class="btn-details" ng-class="{'on': filter.isType1}"></a>
+                    </div>
+                    <ul>
+                        <li class="tr">国股</li>
+                        <li><input ng-model="model.offer_detail.offer_rate01" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate11" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate21" type="number" max="99.99">‰</li>
+                        <li class="tr">城商</li>
+                        <li><input ng-model="model.offer_detail.offer_rate02" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate12" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate22" type="number" max="99.99">‰</li>
+                        <li class="tr">三农</li>
+                        <li><input ng-model="model.offer_detail.offer_rate03" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate13" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate23" type="number" max="99.99">‰</li>
+                        <li class="tr">村镇</li>
+                        <li><input ng-model="model.offer_detail.offer_rate04" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate14" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate24" type="number" max="99.99">‰</li>
+                        <li class="tr">外资</li>
+                        <li><input ng-model="model.offer_detail.offer_rate05" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate15" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate25" type="number" max="99.99">‰</li>
+                        <li class="tr">财务</li>
+                        <li><input ng-model="model.offer_detail.offer_rate06" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate16" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate26" type="number" max="99.99">‰</li>
+                        <li class="tr">每十万加</li>
+                        <li><input ng-model="model.offer_detail.offer_rate07" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate17" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate27" type="number" max="999.999">元</li>
+                    </ul>
+                </div>
+                <div class="line"></div>
+                <div class="g-line-title" style="margin-left:6%;"><span style="color:#fff;background-color:#ff6a00;display:inline-block;width: 28%;"><input style="background-color:#ff6a00;border:none;color:#fff;" ng-model="model.deadline_days" type="text"> -180天</span></div>
+                <div class="info3" ng-class="{'info3-on on': filter.isType2}">
+                    <div class="hd" ng-click="filter.isType2 = !filter.isType2;">
+                        <span class="tr">承兑机构</span>
+                        <span>100万以上</span>
+                        <span>50万-100万</span>
+                        <span>50万以下</span>
+                        <a href="" class="btn-details" ng-class="{'on': filter.isType2}"></a>
+                    </div>
+                    <ul>
+                        <li class="tr">国股</li>
+                        <li><input ng-model="model.offer_detail.offer_rate31" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate41" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate51" type="number" max="99.99">‰</li>
+                        <li class="tr">城商</li>
+                        <li><input ng-model="model.offer_detail.offer_rate32" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate42" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate52" type="number" max="99.99">‰</li>
+                        <li class="tr">三农</li>
+                        <li><input ng-model="model.offer_detail.offer_rate33" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate43" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate53" type="number" max="99.99">‰</li>
+                        <li class="tr">村镇</li>
+                        <li><input ng-model="model.offer_detail.offer_rate34" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate44" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate54" type="number" max="99.99">‰</li>
+                        <li class="tr">外资</li>
+                        <li><input ng-model="model.offer_detail.offer_rate35" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate45" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate55" type="number" max="99.99">‰</li>
+                        <li class="tr">财务</li>
+                        <li><input ng-model="model.offer_detail.offer_rate36" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate46" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate56" type="number" max="99.99">‰</li>
+                        <li class="tr">每十万加</li>
+                        <li><input ng-model="model.offer_detail.offer_rate37" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate47" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate57" type="number" max="999.999">元</li>
+                    </ul>
+                </div>
+                <div class="line"></div>
+                <div class="g-line-title" ng-if="model.deadline_days > 0" style="margin-left:6%;"><span style="color:#fff;background-color:#ff6a00;display:inline-block;width: 27%;padding-left:5px;">0- <input style="background-color:#ff6a00;border:none;color:#fff;" ng-model="model.deadline_days" type="text"> 天</span></div>
+                <div class="info3" ng-if="model.deadline_days > 0" ng-class="{'info3-on on': filter.isType3}">
+                    <div class="hd" ng-click="filter.isType3 = !filter.isType3;">
+                        <span class="tr">承兑机构</span>
+                        <span>100万以上</span>
+                        <span>50万-100万</span>
+                        <span>50万以下</span>
+                        <a href="" class="btn-details" ng-class="{'on': filter.isType3}"></a>
+                    </div>
+                    <ul>
+                        <li class="tr">国股</li>
+                        <li><input ng-model="model.offer_detail.offer_rate61" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate71" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate81" type="number" max="99.99">‰</li>
+                        <li class="tr">城商</li>
+                        <li><input ng-model="model.offer_detail.offer_rate62" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate72" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate82" type="number" max="99.99">‰</li>
+                        <li class="tr">三农</li>
+                        <li><input ng-model="model.offer_detail.offer_rate63" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate73" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate83" type="number" max="99.99">‰</li>
+                        <li class="tr">村镇</li>
+                        <li><input ng-model="model.offer_detail.offer_rate64" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate74" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate84" type="number" max="99.99">‰</li>
+                        <li class="tr">外资</li>
+                        <li><input ng-model="model.offer_detail.offer_rate65" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate75" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate85" type="number" max="99.99">‰</li>
+                        <li class="tr">财务</li>
+                        <li><input ng-model="model.offer_detail.offer_rate66" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate76" type="number" max="99.99">‰</li>
+                        <li><input ng-model="model.offer_detail.offer_rate86" type="number" max="99.99">‰</li>
+                        <li class="tr">每十万加</li>
+                        <li><input ng-model="model.offer_detail.offer_rate67" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate77" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate87" type="number" max="999.999">元</li>
+                    </ul>
+                </div>
+                <div class="line" ng-if="model.deadline_days > 0"></div>
+                </div>
+                <!--<p ng-if="model.bill_style_id==203&&filter.is180==true">180天</p>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==true&&filter.billPrice==1" class="part2">
+            <li>国股:<input ng-model="model.offer_detail.offer_rate01" type="number" max="99.99">%</li>
+            <li class="tcenter">城商:<input ng-model="model.offer_detail.offer_rate02" type="number" max="99.99">%</li>
+            <li class="tright">三农:<input ng-model="model.offer_detail.offer_rate03" type="number" max="99.99">%</li>
+            <li>村镇:<input ng-model="model.offer_detail.offer_rate04" type="number" max="99.99">%</li>
+            <li class="tcenter">外资:<input ng-model="model.offer_detail.offer_rate05" type="number" max="99.99">%</li>
+            <li class="tright">财务:<input ng-model="model.offer_detail.offer_rate06" type="number" max="99.99">%</li>
+            <li>每十万加:<input ng-model="model.offer_detail.offer_rate07" type="number" max="99.99">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==true&&filter.billPrice==2" class="part2">
+            <li>国股:<input ng-model="model.offer_detail.offer_rate11" type="number" max="99.99">%</li>
+            <li class="tcenter">城商:<input ng-model="model.offer_detail.offer_rate12" type="number" max="99.99">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate13">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate14">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate15">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate16">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate17">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==true&&filter.billPrice==3" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate21">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate22">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate23">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate24">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate25">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate26">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate27">%</li>
+        </ul>
+        <p ng-if="model.bill_style_id==203&&filter.is180==false"><input type="number" max="99.99" ng-model="model.deadline_days" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:4em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" />-180天</p>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==false&&filter.billPrice==1" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate31">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate32">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate33">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate34">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate35">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate36">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate37">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==false&&filter.billPrice==2" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate41">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate42">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate43">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate44">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate45">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate46">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate47">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==false&&filter.billPrice==3" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate51">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate52">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate53">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate54">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate55">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate56">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate57">%</li>
+        </ul>
+        <p ng-if="model.bill_style_id==203&&filter.is180==false">0-<input type="number" max="99.99" ng-model="model.deadline_days" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:4em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" />天</p>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==false&&filter.billPrice==1" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate61">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate62">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate63">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate64">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate65">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate66">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate67">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==false&&filter.billPrice==2" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate71">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate72">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate73">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate74">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate75">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate76">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate77">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==203&&filter.is180==false&&filter.billPrice==3" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate81">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate82">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate83">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate84">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate85">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate86">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate87">%</li>
+        </ul>-->
+                <!-- 银纸小票 -->
+
+            <div class="part2" ng-if="model.bill_style_id==204">
+                <div class="line"></div>
+                <div class="g-line-title" style="margin-left:6%;"><span style="color:#fff;background-color:#ff6a00;display:inline-block;padding-left:3px;padding-right:3px;">360及天以上</span></div>
+                <div class="info3" ng-class="{'info3-on on': filter.isType1}">
+                    <div class="hd" ng-click="filter.isType1 = !filter.isType1;">
+                        <span class="tr">承兑机构</span>
+                        <span>100万以上</span>
+                        <span>50万-100万</span>
+                        <span>50万以下</span>
+                        <a href="" class="btn-details" ng-class="{'on': filter.isType1}"></a>
+                    </div>
+                    <ul ng-if="filter.isType1">
+                        <li class="tr">国股</li>
+                        <li><input ng-model="model.offer_detail.offer_rate01" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate11" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate21" type="number" max="99.99">%</li>
+                        <li class="tr">城商</li>
+                        <li><input ng-model="model.offer_detail.offer_rate02" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate12" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate22" type="number" max="99.99">%</li>
+                        <li class="tr">三农</li>
+                        <li><input ng-model="model.offer_detail.offer_rate03" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate13" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate23" type="number" max="99.99">%</li>
+                        <li class="tr">村镇</li>
+                        <li><input ng-model="model.offer_detail.offer_rate04" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate14" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate24" type="number" max="99.99">%</li>
+                        <li class="tr">外资</li>
+                        <li><input ng-model="model.offer_detail.offer_rate05" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate15" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate25" type="number" max="99.99">%</li>
+                        <li class="tr">财务</li>
+                        <li><input ng-model="model.offer_detail.offer_rate06" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate16" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate26" type="number" max="99.99">%</li>
+                        <li class="tr">每十万加</li>
+                        <li><input ng-model="model.offer_detail.offer_rate07" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate17" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate27" type="number" max="999.999">元</li>
+                    </ul>
+                </div>
+                <div class="line"></div>
+                <div class="g-line-title" style="margin-left:6%;"><span style="color:#fff;background-color:#ff6a00;display:inline-block;width: 28%;"><input style="background-color:#ff6a00;border:none;color:#fff;" ng-model="model.deadline_days" type="text"> -360天</span></div>
+                <div class="info3" ng-class="{'info3-on on': filter.isType2}">
+                    <div class="hd" ng-click="filter.isType2 = !filter.isType2;">
+                        <span class="tr">承兑机构</span>
+                        <span>100万以上</span>
+                        <span>50万-100万</span>
+                        <span>50万以下</span>
+                        <a href="" class="btn-details" ng-class="{'on': filter.isType2}"></a>
+                    </div>
+                    <ul ng-if="filter.isType2">
+                        <li class="tr">国股</li>
+                        <li><input ng-model="model.offer_detail.offer_rate31" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate41" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate51" type="number" max="99.99">%</li>
+                        <li class="tr">城商</li>
+                        <li><input ng-model="model.offer_detail.offer_rate32" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate42" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate52" type="number" max="99.99">%</li>
+                        <li class="tr">三农</li>
+                        <li><input ng-model="model.offer_detail.offer_rate33" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate43" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate53" type="number" max="99.99">%</li>
+                        <li class="tr">村镇</li>
+                        <li><input ng-model="model.offer_detail.offer_rate34" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate44" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate54" type="number" max="99.99">%</li>
+                        <li class="tr">外资</li>
+                        <li><input ng-model="model.offer_detail.offer_rate35" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate45" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate55" type="number" max="99.99">%</li>
+                        <li class="tr">财务</li>
+                        <li><input ng-model="model.offer_detail.offer_rate36" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate46" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate56" type="number" max="99.99">%</li>
+                        <li class="tr">每十万加</li>
+                        <li><input ng-model="model.offer_detail.offer_rate37" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate47" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate57" type="number" max="999.999">元</li>
+                    </ul>
+                </div>
+                <div class="line"></div>
+                <div class="g-line-title" style="margin-left:6%;" ng-if="model.deadline_days > 0"><span style="color:#fff;background-color:#ff6a00;display:inline-block;width: 27%;padding-left:5px;">0- <input style="background-color:#ff6a00;border:none;color:#fff;" ng-model="model.deadline_days" type="text"> 天</span></div>
+                <div class="info3" ng-if="model.deadline_days > 0" ng-class="{'info3-on on': filter.isType3}">
+                    <div class="hd" ng-click="filter.isType3 = !filter.isType3;">
+                        <span class="tr">承兑机构</span>
+                        <span>100万以上</span>
+                        <span>50万-100万</span>
+                        <span>50万以下</span>
+                        <a href="" class="btn-details" ng-class="{'on': filter.isType3}"></a>
+                    </div>
+                    <ul ng-if="filter.isType3">
+                        <li class="tr">国股</li>
+                        <li><input ng-model="model.offer_detail.offer_rate61" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate71" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate81" type="number" max="99.99">%</li>
+                        <li class="tr">城商</li>
+                        <li><input ng-model="model.offer_detail.offer_rate62" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate72" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate82" type="number" max="99.99">%</li>
+                        <li class="tr">三农</li>
+                        <li><input ng-model="model.offer_detail.offer_rate63" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate73" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate83" type="number" max="99.99">%</li>
+                        <li class="tr">村镇</li>
+                        <li><input ng-model="model.offer_detail.offer_rate64" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate74" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate84" type="number" max="99.99">%</li>
+                        <li class="tr">外资</li>
+                        <li><input ng-model="model.offer_detail.offer_rate65" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate75" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate85" type="number" max="99.99">%</li>
+                        <li class="tr">财务</li>
+                        <li><input ng-model="model.offer_detail.offer_rate66" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate76" type="number" max="99.99">%</li>
+                        <li><input ng-model="model.offer_detail.offer_rate86" type="number" max="99.99">%</li>
+                        <li class="tr">每十万加</li>
+                        <li><input ng-model="model.offer_detail.offer_rate67" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate77" type="number" max="999.999">元</li>
+                        <li><input ng-model="model.offer_detail.offer_rate87" type="number" max="999.999">元</li>
+                    </ul>
+                </div>
+                <div class="line" ng-if="model.deadline_days > 0"></div>
+            </div>
+                <!-- 银电小票 -->
+                <!--<p ng-if="model.bill_style_id==204&&filter.is360==true">360天</p>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==true&&filter.billPrice==1" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate01">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate02">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate03">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate04">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate05">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate06">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate07">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==true&&filter.billPrice==2" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate11">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate12">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate13">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate14">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate15">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate16">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate17">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==true&&filter.billPrice==3" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate21">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate22">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate23">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate24">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate25">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate26">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate27">%</li>
+        </ul>
+        <p ng-if="model.bill_style_id==204&&filter.is360==false"><input type="number" max="99.99" ng-model="model.deadline_days" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:4em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" />-360天</p>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==false&&filter.billPrice==1" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate31">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate32">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate33">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate34">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate35">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate36">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate37">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==false&&filter.billPrice==2" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate41">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate42">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate43">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate44">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate45">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate46">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate47">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==false&&filter.billPrice==3" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate51">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate52">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate53">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate54">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate55">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate56">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate57">%</li>
+        </ul>
+        <p ng-if="model.bill_style_id==204&&filter.is360==false">0-<input type="number" max="99.99" ng-model="model.deadline_days" style="display:inline-block;font-size:x-small;padding-bottom:0.5em;width:4em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;" />天</p>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==false&&filter.billPrice==1" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate61">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate62">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate63">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate64">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate65">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate66">%</li>
+            <li>每十万加:<input type="number" max="99.99">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==false&&filter.billPrice==2" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate71">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate72">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate73">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate74">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate75">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate76">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate77">%</li>
+        </ul>
+        <ul ng-if="model.bill_style_id==204&&filter.is360==false&&filter.billPrice==3" class="part2">
+            <li>国股:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate81">%</li>
+            <li class="tcenter">城商:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate82">%</li>
+            <li class="tright">三农:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate83">%</li>
+            <li>村镇:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate84">%</li>
+            <li class="tcenter">外资:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate85">%</li>
+            <li class="tright">财务:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate86">%</li>
+            <li>每十万加:<input type="number" max="99.99" ng-model="model.offer_detail.offer_rate87">%</li>
+        </ul>-->
+
+                <!--银电小票-->
+                <!-- 商票 -->
+                <ul ng-if="model.bill_style_id==205" class="info info44">
+                    <li>票据类型</li>
+                    <li style="padding-left: 16px;">利率</li>
+                    <li>电票</li>
+                    <li><input ng-model="model.offer_detail.offer_rate01" type="number">%</li>
+                    <li>纸票</li>
+                    <li><input ng-model="model.offer_detail.offer_rate02" type="number">‰</li>
+                </ul>
+                <!-- 商票 -->                
+                <ul class="contact-details hpxAAb">
+                    <li class="li420"><span>联系人姓名：</span><input style="width:3rem;" type="text" class="i1" ng-model="model.contact_name"></li>
+                    <li class="li580"><span>联系方式：</span><input type="text" class="i2" ng-model="model.contact_phone"></li>
+                    <li ng-if="model.bill_style_id==203||model.bill_style_id==205">
+                        <span>交易地点：</span>
+                        <select name="" ng-model="model.trade_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()">
+                            <option value="">省（直辖市）</option>
+                        </select>
+                        <select name="" ng-model="model.trade_location_id" ng-options="item.id as item.address_name for item in CityData">
+                            <option value="">市（区）</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="g-line-title"><i></i>备注说明：</div>
+                <div class="txt">
+                    <textarea name="" id="" cols="30" rows="10" ng-model="model.description"></textarea>
+                </div>
+                <!--<div class="txt" ng-if="model.bill_style_id==205">
+                    <textarea name="" id="" cols="30" rows="10" ng-model="model.description"></textarea>
+                </div>-->
+                <div class="operate">
+                    <input type="submit" value="马上报价" ng-click="save()">
+                    <a href="" class="btn-cancle" ng-click="close()">取消</a>
+                </div>
+
+            </div>
+    </ion-content>
+</ion-view>

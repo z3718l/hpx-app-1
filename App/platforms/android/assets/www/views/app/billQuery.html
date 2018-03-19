@@ -1,0 +1,97 @@
+<ion-view cache-view="false">
+    <ion-nav-buttons side="right">   
+        <a href="" ui-sref="app.billSearchCity" class="titleAddr addre">{{locationModel.city_name}}</a> </ion-nav-buttons>
+    <ion-nav-title>
+       <!--票源列表--> 
+        <div class="dateTopTitle titleCenter">票源列表</div>
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="page12-2">
+            <!--<div class="hd">
+                <ul>
+                    <li ng-class="{'on': tab == 1}" style="width:50%;"><a href="javascript:void(0)" ng-click="setTab(1)"><span>电票</span></a></li>
+                    <li ng-class="{'on': tab == 2}" style="width:50%;"><a href="javascript:void(0)" ng-click="setTab(2)"><span>纸票</span></a></li>
+                </ul>
+            </div>-->
+            <div class="hot">
+                <div ng-repeat="bill in listData" class="item">
+                    <div class="hot-title">
+                        <a href="">
+                            <span class="tag">{{bill.bill_type_name}}</span>
+                            <span>票面金额：<i>¥ <b>{{(bill.bill_sum_price / 10000).toFixed(2)}} 万</b></i></span>
+                            <span class="addr">{{bill.product_location.length > 6 ? (bill.product_location | limitTo:3) : bill.product_location}}</span>
+                        </a>
+                    </div>
+                    <div class="con" ng-click="hpxRelBill(bill)">
+                        <a href="">
+                            <p>承兑机构 ：{{bill.acceptor_type_name}}</p>
+                            <p>到期日：{{bill.bill_deadline_time | date: 'yyyy-MM-dd'}}<time>{{bill.remaining_day}}天</time></p>
+                            <span class="btn1">我要竞价</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="is_vis && listData.length == 0" class="hpxsorry">
+                抱歉，暂无符合您查询条件的票据
+            </div>
+        </div>
+        <!--<div id="tabBox1" class="tabBox4" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
+            <div class="hd">
+                <ul>
+                    <li  ng-class="{'on': tab == 1}" style="width:50%;"><a href="javascript:void(0)" ng-click="setTab(1)"><span>电票</span></a></li>
+                    <li  ng-class="{'on': tab == 2}" style="width:50%;"><a href="javascript:void(0)" ng-click="setTab(2)"><span>纸票</span></a></li>
+                </ul>
+            </div>
+            <div class="bd" id="tabBox1-bd">
+                <div class="con" ng-if="tab==1">
+                    <div>
+                        <table class="g-table">
+                            <tr style="background: #f2f2f2;">
+                                <th>承兑机构</th>
+                                <th><a href="" class="btn2 on" ng-click="changeArrow('price')">票面金额<i ng-if="filter.sort == 0" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.priceArrow]"></i></a></th>
+                                <th><a href="" class="btn3 on" ng-click="changeArrow('deadline_time')">到期日<i ng-if="filter.sort == 1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.deadlineTimeArrow]"></i></a></th>
+                                <th><span class="btn4">剩余时间</span></th>
+                                <th><span class="btn5">状态</span></th>
+                            </tr>
+                            
+                                <tr class="item" ng-repeat="item in listData101" ng-click="hpxRelBill(item)">
+                                    <td><h3>{{ item.acceptor_type_name }}</h3><p class="addr">{{item.enterprise_location.length > 10 ? (item.enterprise_location | limitTo:10) : item.enterprise_location}}</p></td>
+                                    <td>{{ item.bill_sum_price / 10000 |  currency: '￥' }}万</td>
+                                    <td>{{ item.bill_deadline_time | date:'yyyy-MM-dd' }}</td>
+                                    <td>{{ item.remaining_day ? item.remaining_day : "预约出票"}}</td>
+                                    <td><i class="orange">{{ item.bill_status_name }}</i></td>
+                                </tr>                           
+                        </table>
+                    </div>
+                </div>
+                <div class="con" ng-if="tab==2">
+                    <div>
+                        <table class="g-table">
+                            <tr style="background: #f2f2f2;">
+                                <th>承兑机构</th>
+                                <th><a href="" class="btn2 on" ng-click="changeArrow('price')">票面金额<i ng-if="filter.sort == 0" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.priceArrow]"></i></a></th>
+                                <th><a href="" class="btn3 on" ng-click="changeArrow('deadline_time')">到期日<i ng-if="filter.sort == 1" ng-class="{true:'arrow-down',false:'arrow-up'}[filter.deadlineTimeArrow]"></i></a></th>
+                                <th><a href="" class="btn4">剩余时间</a></th>
+                                <th><a href="" class="btn5">状态</a></th>
+                            </tr>
+                            <tr class="item" ng-repeat="item in listData102" ng-click="hpxRelBill(item)">
+                                <td><h3>{{ item.acceptor_type_name }}</h3><p class="addr">{{item.enterprise_location.length > 10 ? (item.enterprise_location | limitTo:10) : item.enterprise_location}}</p></td>
+                                <td>{{ item.bill_sum_price / 10000 |currency: '￥'}}万</td>
+                                <td>{{ item.bill_deadline_time | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ item.remaining_day ? item.remaining_day : "预约出票"}}</td>
+                                <td><i class="orange">{{ item.bill_status_name }}</i></td>
+                            </tr>                           
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

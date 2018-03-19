@@ -1,0 +1,99 @@
+﻿<ion-view cache-view="false" ng-class="{'bg_eee': model.id != null && model.id != 0 && model.is_verified != 2 && model.is_verified != -1 && model.is_verified != 0}">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" style="font-size: 0.33rem;" menu-toggle="right" ng-click="hpxColse()">关闭</button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        机构认证
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="page20-identification2" ng-if="model.id == null || model.id == 0 || (model.id != null && model.id != 0 && model.is_verified == 2) || (findEnter.is_alive == 2) || model.is_verified == -1 || model.is_verified == 0">
+            <ul class="part1">
+                <li ng-if="model.is_verified == -1">审核失败：{{ model.verify_description }}</li>
+                <li class="li1"><span>企业名：</span><input ng-disabled="model.id != null && model.id != 0 && model.is_verified != -1" type="text" ng-model="model.enterprise_name" placeholder="请输入企业名全称" class="i1"></li>
+                <!--<li class="li2"><span>企业实际经营地址：</span><input type="text" placeholder="请输入企业实际经营地址" class="i2"></li>-->
+            </ul>
+            <ul class="part2">
+                <li class="li1 busLicense" style="position:relative;">
+                    <h3>上传营业执照正本</h3>
+                    <div class="con" style="position:relative;">
+                        <img ng-if="model.credential_photo_address != '' && model.id != null && model.id != 0 && (model.is_verified == 2 || model.is_verified == 0)" ng-click="openImgMagnifyModal(model.credential_photo_address)" src="{{model.credential_photo_address}}" alt="">
+                        <img ng-if="model.credential_photo_address != '' && ( model.id == null || model.id == 0 || model.is_verified == -1)" ng-click="takePhoto(0)" src="{{model.credential_photo_address}}" alt="">
+                        <img ng-if="model.credential_photo_address == '' && ( model.id == null || model.id == 0 || model.is_verified == -1)" ng-click="takePhoto(0)" src="images/upload5.png" alt="">
+                        <div ng-if="isView && imgCre" class="imgLoad imgCre">正在上传，请等待！</div>
+                    </div>
+                    <p style="position:absolute;right:5%;bottom:10%;"><a href="" ng-click="openImgMagnifyModal('images/duozhengheyi.jpg')" class="btn-exp">示例</a></p>
+                </li>
+                <li class="li1 hpxCard">
+                    <h3>上传法人代表身份证（正反面）</h3>
+                    <!--<div class="con">
+                         <img src="images/icon42.png" alt=""> 
+                        <div class="upload"><input type="file" name="" id=""></div>
+                    </div>-->
+                    <div class="con" style="float: left;width: 50%;position:relative;">
+                        <img ng-if="model.artificial_person_front_photo_address != '' && model.id != null && model.id != 0 && (model.is_verified == 2 || model.is_verified == 0)" ng-click="openImgMagnifyModal(model.artificial_person_front_photo_address)" src="{{model.artificial_person_front_photo_address}}" alt="">
+                        <img ng-if="model.artificial_person_front_photo_address != '' && ( model.id == null || model.id == 0 || model.is_verified == -1)" ng-click="takePhoto(1)" src="{{model.artificial_person_front_photo_address}}" alt="">
+                        <img ng-if="model.artificial_person_front_photo_address == '' && ( model.id == null || model.id == 0 || model.is_verified == -1)" ng-click="takePhoto(1)" src="images/upload1.png" alt="">
+                        <div ng-if="isView && isViewF" class="imgLoad imgPreF">正在上传，请等待！</div>
+                        <!--<div ng-if="(model.id == null || model.id == 0) && !filter.tp[1]" class="upload" ng-click="takePhoto(1)"></div>-->
+                    </div>
+                    <div class="con" style="position:relative;float: right;width: 50%">
+                        <img ng-if="model.artificial_person_back_photo_address != '' && model.id != null && model.id != 0 && (model.is_verified == 2 || model.is_verified == 0)" ng-click="openImgMagnifyModal(model.artificial_person_back_photo_address)" src="{{model.artificial_person_back_photo_address}}" alt="">
+                        <img ng-if="model.artificial_person_back_photo_address != '' && ( model.id == null || model.id == 0 || model.is_verified == -1)" ng-click="takePhoto(2)" src="{{model.artificial_person_back_photo_address}}" alt="">
+                        <img ng-if="model.artificial_person_back_photo_address == '' && ( model.id == null || model.id == 0 || model.is_verified == -1)" ng-click="takePhoto(2)" src="images/upload2.png" alt="">
+                        <div ng-if="isView && isViewB" class="imgLoad imgPreB">正在上传，请等待！</div>
+                        <!--<div ng-if="(model.id == null || model.id == 0) && !filter.tp[2]" class="upload" ng-click="takePhoto(2)"></div>-->
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div>提示：上传图片不能大于10M，仅支持jpg/png格式</div>
+                </li>
+                <li class="operate" ng-if="(model.id == null || model.id == 0)&&model.is_verified != -1"><input type="submit" ng-click="save()" value="确认提交"></li>
+                <li class="operate" ng-if="model.id != null && model.id != 0 && model.is_verified == 2"><input type="submit" value="审核中"></li>
+                <li class="operate" ng-if="model.id != null && model.id != 0 && model.is_verified == 0"><input type="submit" value="审核中"></li>
+                <li class="operate" ng-if="model.is_verified == -1"><input type="submit" ng-click="save()" value="重新提交"></li>
+                <!--<li class="operate" ng-if="model.id != null && model.id != 0 && model.is_verified != 2"><input type="submit" value="已认证"></li>-->
+                <li class="tip" ng-if="model.id != null && model.id != 0 && model.is_verified == 2">温馨提示:机构认证资料提交审核过程中，请保持通讯畅通，汇票线客服人员可能会与你联系。</li>
+                <li class="tip" ng-if="model.id != null && model.id != 0 && model.is_verified == 0">温馨提示:机构认证资料提交审核过程中，请保持通讯畅通，汇票线客服人员可能会与你联系。</li>
+            </ul>
+        </div>
+        <div class="page74" ng-if="model.id != null && model.id != 0 && model.is_verified != 2 && model.is_verified != -1 && model.is_verified != 0">
+            <div class="box">
+                <div class="title"><span><img src="images/icon741.png" alt="">已认证</span></div>
+                <ul>
+                    <li><span>机构名称</span>{{model.enterprise_name}}</li>
+                    <!--<li><span>机构地址</span>{{findEnter.enterprise_address}}</li>-->
+                    <li><span>营业执照注册号</span>{{model.credential_number}}</li>
+                </ul>
+            </div>
+        </div>
+        <!--提示信息-->
+        <!--<div class="alert-bind-info" style="top: -.2rem;height: 102%;" ng-class="{'show': filter.tip}">
+            <div class="box">
+                <h3>温馨提示</h3>
+                <p>已完善机构认证信息，请进行下一步业务授权</p>
+                <ul>
+                    <li class="on"><i>1</i>编辑联系人信息</li>
+                    <li class="on"><i>2</i>机构认证</li>
+                    <li><i>3</i>业务授权</li>
+                    <li><i>4</i>账户绑定</li>
+                </ul>
+                <p class="tips">注：进行电票交易须完成四步信息填写，如无需电票交易则填写第一、二步信息即可。</p>
+                <div class="operate">
+                    <a href="" class="btn-cancle" ui-sref="app.user">取消</a><a href="" class="btn-next" ui-sref="app.authorizate">进入下一步</a>
+                </div>
+            </div>
+        </div>-->
+        <!-- 图片放大页面弹框 -->
+        <script id="imgMagnify.html" type="text/ng-template">
+            <ion-modal-view hide-nav-bar="true" ng-click="closeImgMagnifyModal()">
+                <ion-content class="imgMagnify">
+                    <ion-scroll class="imgMagnify" zooming="true" min-zoom="0.5" max-zoom="3" direction="xy" scrollbar-x="false" scrollbar-y="false" has-bouncing="true" overflow-scroll="false" style="width: 100%; height:100%;">
+                        <div class="imgMagnify">
+                            <img ng-class="{rotate:rotate90}" src="{{img_path}}" />
+                        </div>
+                    </ion-scroll>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,39 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" style="font-size: 0.33rem;" menu-toggle="right" ng-click="hpxColse()">关闭</button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        账户绑定
+    </ion-nav-title>
+    <ion-content>
+        <div class="page67">
+            <div class="part2">
+                <ul class="part3" ng-repeat="item in AccountData" ng-if="item.account_type_code == accountTypeCode">
+                    <li>机构名称：<span>{{ item.account_person }}</span></li>
+                    <li>账号：<span>{{ item.account_number }}</span></li>
+                    <li>开户行：<span>{{ item.bank_name }}</span></li>
+                    <li>联行号：<span>{{ item.bank_number }}</span></li>
+                    <li>审核状态：<span>{{ item.statusToDescription }}</span></li>
+                    <li ng-if="item.status != 1">
+                        <a ng-click="verify(item)">鉴权</a>
+                        <div ng-if="model.account_id == item.account_id">
+                            <label class="col-md-3 col-xs-3 control-label" style="float: left;height: 0.66rem;line-height: .66rem;">鉴权金额: </label>
+                            <div style="width:4.5rem;" class="col-md-8 col-xs-8">
+                                <input type="number" placeholder="请输入不超过1元的金额" name="account_number" ng-model="model.verify_string" class="form-control" required />
+                            </div>
+                            <a ng-click="verifySubmit()">提交</a>
+                        </div>
+                    </li>
+                    <li><div class="line"></div></li>
+                </ul>
+                <div class="part1" ng-if="!AccountData || AccountData.length < 2">
+                    添加银行账户
+                </div>
+                <div class="con" ng-if="!AccountData || AccountData.length < 2">
+                    <div class="upload" ui-sref="app.newAddAccount"></div>
+                </div>
+            </div>
+            <div class="tip">*温馨提示:最多可绑定两张银行卡（收票企业须关联兴业银行对公账户）作为您收、出票的指定账户！</div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,47 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        今日报价
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <span ng-click="hpxXinZeng()"><img style="display:inline-block;width:20px;height:20px;margin-top:6px;margin-right:4px;" src="images/baojia.png" ng-if="listData.length < 4 || listData == null"/></span>
+    </ion-nav-buttons>
+    <ion-content style="background-color:#f2f2f2;">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="page13-1">
+            <div class="item" ng-repeat="item in listData" ng-click="changeBillOfferId(item.bill_offer_id)" ui-sref="app.onDaDetail" style="margin-bottom:4px;">
+                <p class="hpxbaojia"><span style="background-color:#ff6a00;color:#fff;margin-right:10px;padding:3px 5px 3px 5px;width: 22%;display: inline-block;height: 30px;line-height: 24px;text-align:center;">{{item.bill_style_name}}</span><span style="float: right;">报价人：{{item.contact_name}}</span></p>
+                <table class="g-table">
+                    <tr>
+                        <td ng-show="item.bill_style_id == 205">电票：<span ng-if="item.offer_detail.offer_rate01">{{ item.offer_detail.offer_rate01 | limitTo:4}}%</span><span ng-if="!item.offer_detail.offer_rate01">--</span></td>
+                        <td ng-show="item.bill_style_id == 205">纸票：<span ng-if="item.offer_detail.offer_rate02">{{ item.offer_detail.offer_rate02 | limitTo:4}}‰</span><span ng-if="!item.offer_detail.offer_rate02">--</span></td>
+                        <td ng-show="item.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td ng-show="item.bill_style_id != 205">国股：<span ng-if="item.offer_detail.offer_rate01">{{ item.offer_detail.offer_rate01 | limitTo:4}}{{ item.bill_style_id == 202 || item.bill_style_id == 204 ? '%' : '‰' }}</span><span ng-if="!item.offer_detail.offer_rate01">--</span></td>
+                        <td ng-show="item.bill_style_id != 205">城商：<span ng-if="item.offer_detail.offer_rate02">{{ item.offer_detail.offer_rate02 | limitTo:4}}{{ item.bill_style_id == 202 || item.bill_style_id == 204 ? '%' : '‰' }}</span><span ng-if="!item.offer_detail.offer_rate02">--</span></td>
+                        <td ng-show="item.bill_style_id != 205">三农：<span ng-if="item.offer_detail.offer_rate03">{{ item.offer_detail.offer_rate03 | limitTo:4}}{{ item.bill_style_id == 202 || item.bill_style_id == 204 ? '%' : '‰' }}</span><span ng-if="!item.offer_detail.offer_rate03">--</span></td>
+                    </tr>
+                    <tr>
+                        <td ng-show="item.bill_style_id != 205">村镇：<span ng-if="item.offer_detail.offer_rate04">{{ item.offer_detail.offer_rate04| limitTo:4}}{{ item.bill_style_id == 202 || item.bill_style_id == 204 ? '%' : '‰' }}</span><span ng-if="!item.offer_detail.offer_rate04">--</span></td>
+                        <td ng-show="item.bill_style_id != 205">外资：<span ng-if="item.offer_detail.offer_rate05">{{ item.offer_detail.offer_rate05| limitTo:4}}{{ item.bill_style_id == 202 || item.bill_style_id == 204 ? '%' : '‰' }}</span><span ng-if="!item.offer_detail.offer_rate05">--</span></td>
+                        <td ng-show="item.bill_style_id != 205">财务：<span ng-if="item.offer_detail.offer_rate06">{{ item.offer_detail.offer_rate06| limitTo:4}}{{ item.bill_style_id == 202 || item.bill_style_id == 204 ? '%' : '‰' }}</span><span ng-if="!item.offer_detail.offer_rate06">--</span></td>
+                        <td ng-show="item.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td ng-show="item.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td ng-show="item.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
+                </table>
+                <!--<div class="operate">
+                    <a href="" class="btn-modify" ng-click="edit(item)">修改</a>
+                    <a href="" class="btn-close" ng-click="remove(item)">关闭</a>
+                </div>-->
+            </div>
+
+
+
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

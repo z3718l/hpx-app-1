@@ -1,0 +1,1 @@
+$(function(){"use strict";!function(){function t(t){function n(){e.text("重新发送("+a+")"),a--,a<0&&(e.removeClass("disabled"),a=59,e.text("发送验证码(60)"),clearInterval(r))}var e=$(t);if(e.hasClass("disabled"))return!1;e.addClass("disabled");var a=59,r=setInterval(n,1e3);return!1}$(".btn-yzm").click(function(n){return t(".btn-yzm"),!1})}()});

@@ -1,0 +1,53 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        汇票线邀请活动
+    </ion-nav-title>
+    <ion-content>
+        <script id="endorsePopup.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-content>
+                    <div class="cpop">
+                        <div class="explain">
+                            <h2>活动规则说明</h2>
+                            <div class="idtext">
+                                <ul>
+                                    <li>
+                                        <div class="idtext1"><div>1</div></div>
+                                        <div class="idtext2">邀请好友成功注册后,双方均可获特权,邀请人每邀请3人成功注册后增加1个月"挂失查询"免费使用特权时限,可最高累加至12个月的免费使用权限.</div>
+                                    </li>
+                                    <li>
+                                        <div class="idtext1"><div>2</div></div>
+                                        <div class="idtext2">每位被邀请人填写邀请码注册后可获得双重惊喜特权,被邀请人须为<span>汇票线新用户</span>.</div>
+                                    </li>
+                                    <li>
+                                        <div class="idtext1"><div>3</div></div>
+                                        <div class="idtext2">本活动最终解释权归汇票线所有，可咨询客服<span>400-772-0575</span>.</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+        <div class="container">
+            <div class="baner"><img src="images/hpxYao.png" /></div>
+            <p>向票据同行朋友(汇票线新用户)推荐注册汇票线服务平台,即可增加<span>"挂失查询"免费使用特权时限，</span>请参照活动规则说明。</p><br />
+            <img class="iml" style="width:60px;margin-left:10px;" src="images/hpxYao1.png" /><br />
+            <input type="button" value="开始邀请" ng-click="staetEvent()" /><br />
+            <a class="tca" ng-click="guize()">活动规则说明>></a>
+            <div class="Record">
+                <img src="images/hpxYao2.png" />
+                <p>邀请记录</p>
+                <div class="Record-list">
+                    <ul>
+                        <li ng-repeat="item in getAppPhone">
+                            <div class="fontleft">{{item}}</div>
+                            <div class="fontright">已邀请</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,73 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content class="post-size-14px">
+        <ion-nav-bar class="bar bar-assertive app-top-bar" align-title="center">
+            <ion-nav-back-button></ion-nav-back-button>
+
+            <!--<ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>-->
+        </ion-nav-bar>
+        <ion-nav-view></ion-nav-view>
+        <!--ng-show="$state.includes('app.home')||$state.includes('app.receiveBill')||$state.includes('app.user')||$state.includes('app.drawBill')||$state.includes('app.user')||$state.includes('app.billOfferQuery')||$state.includes('app.signin')||$state.includes('app.setting')"-->
+        <ion-footer-bar class="tabs tabs-stable tabs-icon-top" ng-show="$state.includes('app.home')||$state.includes('app.receiveBill')||$state.includes('app.user')||$state.includes('app.drawBill')||$state.includes('app.billOfferQuery')">
+            <ul class="footer">
+                <li ng-class="{'on':$state.includes('app.home')}" ui-sref="app.home" nav-clear><a>首页</a></li>
+                <!--<li ng-class="{'on':$state.includes('app.drawBill')}"><a  ui-sref="app.drawBill">我要出票</a></li>-->
+                <li ng-class="{'on':$state.includes('app.drawBill')}"><a ng-click="hpxDraw()">我要出票</a></li>
+                <li ng-class="{'on':$state.includes('app.receiveBill')}"><a ui-sref="app.receiveBill">我要收票</a></li>
+                <!--<li ng-class="{'on':$state.includes('app.billOfferQuery')}"><a ui-sref="app.billOfferQuery">机构报价</a></li>-->
+                <li ng-class="{'on':$state.includes('app.billOfferQuery')}" ng-click="hpxji()"><a href="#">机构报价</a></li>
+                <!--<li ng-class="{'on':$state.includes('app.user')||$state.includes('app.signin')||$state.includes('app.setting')}"><a ui-sref="app.user">我的账户</a></li>-->
+                <li ng-class="{'on':$state.includes('app.user')||$state.includes('app.signin')||$state.includes('app.setting')}"><a ng-click="hpxUserA()">我的账户</a></li>
+            </ul>
+        </ion-footer-bar>
+    </ion-side-menu-content>
+
+    <!--<ion-side-menu side="left" class="main-menu" expose-aside-when="large">
+        <ion-header-bar class="bar-dark">
+        </ion-header-bar>
+        <ion-content scroll="false">
+            <ion-list>
+                <ion-item class="item-divider item-dark item-icon-right">
+                    点检内容
+                </ion-item>
+                <ion-item class="item-icon-left item-icon-right" nav-clear menu-close ui-sref="app.home">
+                    <i class="icon ion-ios-location"></i>
+                    01.操作面板、表面
+                    <i class="icon ion-ios-arrow-right gray"></i>
+                </ion-item>
+                <ion-item class="item-icon-left item-icon-right" nav-clear menu-close ui-sref="app.home">
+                    <i class="icon ion-ios-location"></i>
+                    02.电气箱外表
+                    <i class="icon ion-ios-arrow-right gray"></i>
+                </ion-item>
+                <ion-item class="item-icon-left item-icon-right" nav-clear menu-close ui-sref="app.home">
+                    <i class="icon ion-ios-location"></i>
+                    03.润滑油箱
+                    <i class="icon ion-ios-arrow-right gray"></i>
+                </ion-item>
+                <ion-item class="item-icon-left item-icon-right" nav-clear menu-close ui-sref="app.home">
+                    <i class="icon ion-ios-location"></i>
+                    04.风机运行
+                    <i class="icon ion-ios-arrow-right gray"></i>
+                </ion-item>
+                <ion-item class="item-icon-left item-icon-right" nav-clear menu-close ui-sref="app.home">
+                    <i class="icon ion-ios-location"></i>
+                    05.网带运行
+                    <i class="icon ion-ios-arrow-right gray"></i>
+                </ion-item>
+                <ion-item class="item-divider item-dark">
+                    设置
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.setting">
+                    <i class="icon ion-gear-a"></i>
+                    <h2 class="menu-text">设置</h2>
+                </ion-item>
+                <ion-item class="item-icon-left" nav-clear menu-close ng-click="logout()">
+                    <i class="icon ion-android-exit"></i>
+                    <h2 class="menu-text">退出</h2>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>-->
+</ion-side-menus>

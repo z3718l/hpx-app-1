@@ -1,0 +1,11 @@
+{
+     "android": {
+         "release": {
+             "keystore": "elite-release-key.keystore",
+             "storePassword": "123654789",
+             "alias": "elite",
+             "password" : "123654789",
+             "keystoreType": "jks"
+         }
+     }
+ }

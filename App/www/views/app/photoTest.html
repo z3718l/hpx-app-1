@@ -1,0 +1,18 @@
+﻿<ion-view>
+    <ion-nav-title>
+        拍照测试
+    </ion-nav-title>
+    <ion-content>
+        <ion-item>
+            <button ng-click="takePhoto()" class="button button-block button-positive icon-left ion-ios-camera">
+                拍照
+            </button>
+            <button ng-click="upload(photoSrc)" class="button button-block button-positive icon-left ion-ios-upload">
+                上传
+            </button>
+        </ion-item>
+        <ion-item class="item-image">
+            <img ng-src="{{ photoSrc }}">
+        </ion-item>
+    </ion-content>
+</ion-view>

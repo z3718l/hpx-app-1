@@ -1,0 +1,61 @@
+﻿
+<ion-view cache-view="false">
+    <ion-nav-title>
+        选择城市
+    </ion-nav-title>
+
+
+    <ion-content>
+        <div class="page-search">
+
+            <div class="search-box">
+                <input type="text" ng-model="filter.searchText" ng-model-options="{debounce : 1000}" ng-change="search()" placeholder="搜索">
+            </div>
+            <ul class="search_result">
+                <li ng-repeat="s in filter.searchResult" ng-click="setCity(s.Id, s.name, s.parentAddressId, s.parentName)">{{s.parentName + ' ' + s.name}}</li>
+            </ul>
+            <!--<div class="part1">
+                <p>选择日期</p>
+                <input type="date" ng-model="billSearchModel.date"><p ng-if="!billSearchModel.date" class="p_date">点击选择时期</p>
+            </div>-->
+            <div class="part1">
+                <p>当前定位</p>
+                <a href="" class="btn1" ng-click="geoLocation(1);"><p style="display:inline-block;width: auto;margin: 0;padding: 0;" ng-if="isGeoLocation">{{billSearchModel.province_name + billSearchModel.city_name}}</p><span>GPS定位</span></a>
+
+                <p>热门城市</p>
+                <div class="con1">
+                    <a href="" ng-class="{'on': billSearchModel.city_id == null && billSearchModel.province_id == null}" ng-click="hotCity()">全国</a>
+                    <a href="" ng-class="{'on': billSearchModel.province_id == 860}" ng-click="hotCity(860, '上海市')">上海</a>
+                    <a href="" ng-class="{'on': billSearchModel.province_id == 1}" ng-click="hotCity(1, '北京市')">北京</a>
+                    <a href="" ng-class="{'on': billSearchModel.city_id == 2132}" ng-click="hotCity(2132, '广州市')">广州</a>
+                    <a href="" ng-class="{'on': billSearchModel.city_id == 2158}" ng-click="hotCity(2158, '深圳市')">深圳</a>
+                    <a href="" ng-class="{'on': billSearchModel.city_id == 1007}" ng-click="hotCity(1007, '杭州市')">杭州</a>
+                </div>
+            </div>
+            <div class="part2">
+                <div class="title">省份城市</div>
+            </div>
+        </div>
+        <div class="select-box">
+            <ul class="select-left">
+                <!--<li>{{billSearchModel.province_name?billSearchModel.province_name:"省份"}}</li>-->
+                <ion-scroll class="ion-scroll" zooming="true" direction="y" scrollbar-y="false" style="background-color: #f2f2f2;">
+                    <li ng-class="{'on': item.id == billSearchModel.province_id}" ng-repeat="item in ProvinceData" ng-click="setProvince(item.id, item.address_name);setTab($index + 1);scrollCityToTop();">{{item.address_name}}</li>
+                </ion-scroll>
+            </ul>
+            <div class="select-right">
+                <!-- 安徽 -->
+                <ul class="con">
+                    <!--<li>{{billSearchModel.city_name?billSearchModel.city_name:"城市"}}</li>-->
+                    <ion-scroll delegate-handle="city" class="ion-scroll r" zooming="true" direction="y" scrollbar-y="false">
+                        <li ng-repeat="item in CityData" ng-class="{'on': item.id == billSearchModel.city_id}" ng-click="setCity(item.id, item.address_name);">{{item.address_name}}</li>
+                    </ion-scroll>
+                </ul>
+            </div>
+
+        </div>
+        <!--<div class="page-search">
+            <div class="operate"><input type="submit" value="确认提交" ng-click="submit()"></div>
+        </div>-->
+    </ion-content>
+</ion-view>

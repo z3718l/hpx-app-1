@@ -1,0 +1,12 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        已绑定公司
+    </ion-nav-title>   
+    <ion-content>
+        <ion-list class="list">
+            <div class="item" ng-repeat="enterprise in enterprises1" ng-click="loginEnter(enterprise.enterprise_id)" style="text-align: center;">
+                {{enterprise.enterprise_name}}
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

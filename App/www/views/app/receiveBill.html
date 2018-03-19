@@ -1,0 +1,67 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我要收票
+    </ion-nav-title>
+    <ion-content>   
+        <div class="page12-1 hpxPart">
+            <div class="g-line-title"><i></i>票源查询条件选择</div>
+            <ul class="part1">
+                <li>
+                    <span>票据类型：</span>
+                    <em ng-class="{true: 'on', false: ''}[filter.billTypeID=='']" ng-click="choiceAllBillType()">全部</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.billTypeID=='101']" ng-click="choiceEBillType()">电票</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.billTypeID=='102']" ng-click="choicePBillType()">纸票</em>
+                </li>
+                <li>
+                    <span>交易方式：</span>
+                    <em ng-class="{true: 'on', false: ''}[filter.tradeTypeCode=='']" ng-click="choiceAlltradeType()">全部</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.tradeTypeCode=='701']" ng-click="choiceNtradeType()">现票卖断</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.tradeTypeCode=='702']" ng-click="choiceRAlltradeType()">预约出票</em>
+                </li>
+                <!--<li>
+                    <span>票据状态：</span>
+                    <em ng-class="{true: 'on', false: ''}[filter.billStatusAll==true]" ng-click="choiceAllBillStatus()">全部</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.billStatusCode=='801,802']" ng-click="choiceNAllBillStatus()">未交易</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.billStatusCode=='803,804,805,806,807,808,809,810,811,812,813']" ng-click="choiceYAllBillStatus()">已交易</em>
+                </li>-->
+                <li>
+                    <span>承兑机构：</span>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray=='']" ng-click="choiceAllAcceptorType()">全部</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray.indexOf('401') != -1]" ng-click="choiceAcceptorType('401')">国股</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray.indexOf('402') != -1]" ng-click="choiceAcceptorType('402')">城商</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray.indexOf('404') != -1]" ng-click="choiceAcceptorType('404')">三农</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray.indexOf('405') != -1]" ng-click="choiceAcceptorType('405')">村镇</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray.indexOf('406') != -1]" ng-click="choiceAcceptorType('406')">外资</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray.indexOf('407') != -1]" ng-click="choiceAcceptorType('407')">财务</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.acceptorTypeIdArray.indexOf('408') != -1]" ng-click="choiceAcceptorType('408')">商票</em>
+                </li>
+                <li>
+                    <span>票据特点：</span>
+                    <em ng-class="{true: 'on', false: ''}[filter.billCharacterCode=='']" ng-click="choiceAllBillCharacter()">全部</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.billCharacterCode=='1701']" ng-click="choiceYBillCharacter()">足月</em>
+                    <em ng-class="{true: 'on', false: ''}[filter.billCharacterCode=='1702']" ng-click="choiceNBillCharacter()">不足月</em>
+                    <a ng-click="showHelp()" class="help"></a>
+                </li>
+                <!--<li>
+                    <span>票面金额：</span>
+                    <em class="on">不限</em>
+                    <em>&lt;100万</em>
+                    <em>100-300万</em>
+                    <em>≥300万</em>
+                </li>-->
+            </ul>
+            <div class="part2">
+                所在地区：
+                <select name="" style="background-color:#fff" ng-model="filter.ProvinceID" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="filterProvinceChange()">
+                    <option value="">省（直辖市）</option>
+                </select>
+                <select name="" style="background-color:#fff;" ng-model="filter.CityID" ng-options="item.id as item.address_name for item in CityData">
+                    <option value="">市</option>
+                </select>
+            </div>
+            <div class="g-single-submit">
+                <input type="submit" ng-click="getResult()" value="我要查询">
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

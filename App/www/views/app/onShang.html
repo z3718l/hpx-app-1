@@ -1,0 +1,75 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-share" menu-toggle="right" ng-click="share()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        商票--报价
+    </ion-nav-title>
+    <ion-content>
+        <div class="page73">
+            <div class="g-line-title"><i></i>报价信息</div>
+            <ul class="part1">
+                <li>
+                    <span>票据类型：</span>
+                    <em ng-class="{true: 'on', false: ''}[model.bill_style_id==205]" ng-click="choice205BillStye()">商票</em>
+                </li>
+                <li>
+                    <span>交易方式：</span>
+                    <em ng-class="{true: 'on', false: ''}[model.trade_type_id==1801]" ng-click="choice1801TradeType()">买断</em>
+                    <em ng-class="{true: 'on', false: ''}[model.trade_type_id==1804]" ng-click="choice1804TradeType()">回购</em>
+                </li>
+                <li>
+                    <span>贸易背景：</span>
+                    <em ng-class="{true: 'on', false: ''}[model.trade_background_code==1601]" ng-click="choice1601TradeBackground()">不限</em>
+                    <em ng-class="{true: 'on', false: ''}[model.trade_background_code==1602]" ng-click="choice1602TradeBackground()">真实</em>
+                    <em ng-class="{true: 'on', false: ''}[model.trade_background_code==1603]" ng-click="choice1603TradeBackground()">融资票</em>
+                </li>
+                <li>
+                    <span>额度：</span>
+                    <em ng-class="{true: 'on', false: ''}[model.max_price_type==0]" ng-click="choice0MaxPriceType()">不限</em>
+                    <em ng-class="{true: 'on', false: ''}[model.max_price_type==1]" ng-click="choice1MaxPriceType()">具体额度</em><input ng-if="model.max_price_type==1" ng-model="model.max_price" type="number" style="display:inline-block;width:4em;border:1px solid #d6d6d6;height:.6rem;border-radius:.1rem;margin-top:.5em" />
+                </li>
+            </ul>
+
+            <!--银电大票-->
+            <div class="title">承兑机构：</div>
+
+            
+            <!-- 商票 -->
+            <ul class="info">
+                <li>票据类型</li>
+                <li>利率</li>
+                <li>电票</li>
+                <li><input ng-model="model.offer_detail.offer_rate01" type="number" max="99.99">%</li>
+                <li>纸票</li>
+                <li><input ng-model="model.offer_detail.offer_rate02" type="number" max="99.99">‰</li>
+            </ul>
+            <!-- 商票 -->
+
+            <ul class="contact-details">
+                <li class="li42"><span>联系人姓名：</span><input type="text" class="i1" ng-model="model.contact_name"></li>
+                <li class="tright li58"><span>联系方式：</span><input type="text" class="i2" ng-model="model.contact_phone"></li>
+                <li>
+                    交易地点：
+                    <select name="" ng-model="model.trade_province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()">
+                        <option value="">省（直辖市）</option>
+                    </select>
+                    <select name="" ng-model="model.trade_location_id" ng-options="item.id as item.address_name for item in CityData">
+                        <option value="">市（区）</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="g-line-title"><i></i>备注说明：</div>
+            <div class="txt">
+                <textarea name="" id="" cols="30" rows="10" ng-model="model.description"></textarea>
+            </div>
+            <div class="operate">
+                <input type="submit" value="马上报价" ng-click="save()">
+                <a href="" class="btn-cancle" ng-click="close()">取消</a>
+            </div>
+
+        </div>
+
+        
+    </ion-content>
+</ion-view>

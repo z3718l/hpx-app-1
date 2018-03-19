@@ -1,0 +1,100 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        挂失查询
+    </ion-nav-title>
+    <ion-content>
+        <div class="page49">
+            <h3>汇票票号</h3>
+            <input type="text" ng-model="model.billNumber" placeholder="请输入所查询的16位汇票票号或后8位汇票票号">
+            <div ng-if="!queryResult" class="txt">
+                <p>温馨提示：</p>
+                <p>1、请输入16位或后8位汇票票号；</p>
+                <p>2、挂失查询数据来源于央行、人民法院报、其他省市法制报及其他报纸；</p>
+                <P>3、免责声明：本工具旨在最大化帮助用户识别汇票业务的风险，因此本工具未收录的相关挂失数据导致的风险，与本工具无关。</p>
+            </div>
+            <div class="operate">
+                <input type="reset" ng-click="clear()" value="清空">
+                <input type="submit" ng-click="query()" value="查询">
+            </div>
+            <ul class="result" ng-if="queryResult">
+                <li><span>票据号：</span>{{ queryResult.bill_number }}</li>
+                <li><span>票面金额：</span>{{ queryResult.bill_sum_price }}元</li>
+                <li><span>公告法院：</span>{{ queryResult.announce_court }}</li>
+                <li><span>申请人：</span>{{ queryResult.enterprise_name }}</li>
+                <li><span>出票日期：</span>{{ queryResult.draw_time|date:'yyyy-MM-dd' }}</li>
+                <li><span>公告日期：</span>{{ queryResult.announce_time|date:'yyyy-MM-dd' }}</li>
+                <li><span>公告详情：</span>{{ queryResult.description }}</li>
+            </ul>
+            <!--              
+            <div ng-if="queryResult" class="page50">
+                <table class="list">
+                    <tr>
+                        <th>票据号</th>
+                        <td>{{ queryResult.bill_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>票面金额</th>
+                        <td>{{ queryResult.bill_sum_price }}元</td>
+                    </tr>
+                    <tr>
+                        <th>公告法院</th>
+                        <td>{{ queryResult.announce_court }}</td>
+                    </tr>
+                    <tr>
+                        <th>申请人</th>
+                        <td>{{ queryResult.enterprise_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>出票日期</th>
+                        <td>{{ queryResult.draw_time|date:'yyyy-MM-dd' }}</td>
+                    </tr>
+                    <tr>
+                        <th>公告日期</th>
+                        <td>{{ queryResult.announce_time|date:'yyyy-MM-dd' }}</td>
+                    </tr>
+                    <tr>
+                        <th>公告详情</th>
+                        <td>{{ queryResult.description }}</td>
+                    </tr>
+                </table>
+            </div>
+            -->
+        </div>
+        
+        <!--购买弹窗-->
+        <script id="buyPopup.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar>
+                    <header>
+                        <h3>购买“挂失查询”使用权限</h3>
+                    </header>
+                </ion-header-bar>
+                <ion-content>
+                    <div class="page30">
+                        <ul class="g-list">
+                            <li>企业名称：<span class="r">{{identity.enterprise_name}}</span></li>
+                            <li>联系人：<span class="r">{{identity.customer_name}}</span></li>
+                            <li>购买工具使用权限时长选择：</li>
+                            <li class="h_bty">
+                                <section ng-repeat="packages in package" style="width:24%;padding:0;display:inline-block;" ng-init="refresh()">
+                                    <div class="h_o" ng-click="hpxPack(packages)">
+                                        <input type="radio" name="sex" value="" $index />
+                                        <span>{{packages.package_timeornum}}</span><span>个月</span>
+                                    </div>
+                                </section>
+                            </li>
+                            <li style="border-bottom: 1px solid #d6d6d6;">金额：<span class="r">￥{{price}}</span></li>
+                        </ul>
+                        <div class="g-order-status">
+                            <div class="hpxaa">
+                                <a class="btn-sure btn" style="margin-right: 34px;" ng-click="buy()" ng-disabled="!model.verify_code">购买</a>
+                                <a class="btn-cancle btn" ng-click="buyModal.hide()">取消</a>                                
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+
+    </ion-content>
+</ion-view>

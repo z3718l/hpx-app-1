@@ -1,0 +1,72 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <a class="btn-setting" ui-sref="app.setting"></a>
+    </ion-nav-buttons>
+    <ion-nav-title>
+       我的账户
+    </ion-nav-title>
+    <ion-content style="background-color:#f2f2f2;" id="hpxss" overflow-scroll="true">
+        <div class="my-account">
+            <div class="user-info">
+                <a id="online-service" class="btn-online-service"><i></i>联系客服</a>
+                <img src="images/geren.png" ng-if="!isSignIn" ui-sref="app.signin" class="face">
+                <img src="images/geren.png" ng-if="isSignIn" ui-sref="app.userInfo" class="face">
+                <h3 ui-sref="app.signin" ng-if="!isSignIn">未登录</h3>
+                <h3 ui-sref="app.accountStatus" ng-if="isSignIn" ng-bind="customerInfo.phone_number"></h3>
+                <!--<p><a href="" class="btn-details" ui-sref="app.userInfo" ng-if="model.is_verified != 0 && isSignIn">联系人信息</a></p>-->
+                <!--<p><a href="" class="btn-details" ui-sref="app.accountStatus" ng-if="model.is_verified == 0 && isSignIn">完善信息即可交易</a></p>-->
+                <p><a href="" class="btn-details" ui-sref="app.accountStatus" ng-if="!hpxBankAccount.corp.v_acct.acct_no || hpxBankAccount.corp.v_acct.acct_no == ''">请继续完善资料信息</a></p>
+                <p><a href="" class="btn-details" ui-sref="app.accountStatus" ng-if="hpxBankAccount.corp.v_acct.acct_no && hpxBankAccount.corp.v_acct.acct_no != ''">详细资料信息</a></p>
+            </div>
+            <div class="cnav2">
+                <div class="item1" ng-click="hpxAccount()"><img src="images/icon152-1.png" alt="">执剑人账户</div>
+                <div class="item2" ui-sref="app.recharge"><img src="images/icon152-2.png" alt="">平台账户</div>
+            </div>
+            <ul class="cnav3">
+                <li><a ui-sref="app.myReleaseElecAll">我的发布<i ng-bind="customerInfo.publish_active_number"></i></a></li>
+                <li><a ui-sref="app.myBidding">我的竞价<i ng-bind="customerInfo.bid_active_number"></i></a></li>
+                <li><a ui-sref="app.myTask">我的任务<i ng-bind="customerInfo.mission_number"></i></a></li>
+            </ul>
+            <ul class="list15">
+                <!--<li><a ui-sref="app.accredit"><img src="images/icon153-1.png" alt="" class="icon">机构认证</a></li>-->
+                <!--<li><a ui-sref="app.authorizate"><img src="images/icon153-6.png" alt="" class="icon">业务授权</a></li>-->
+                <!--<li><a ng-click="accountBind()"><img src="images/icon153-2.png" alt="" class="icon">账户绑定</a></li>-->
+                <li><a ui-sref="app.security"><img src="images/icon153-3.png" alt="" class="icon">安全中心</a></li>
+                <li><a ui-sref="app.message"><img src="images/icon153-4.png" alt="" class="icon">消息中心<i ng-bind="customerInfo.notification_number"></i></a></li>
+                <li><a ui-sref="app.follow"><img src="images/icon153-5.png" alt="" class="icon">我的关注与收藏</a></li>
+            </ul>
+        </div>
+        <!--账户余额-->
+        <script id="accountPopup.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar>
+                    <header>
+                        <i class="icon ion-android-arrow-back" style="float:left;color:#fff;font-size:0.55rem;margin-left:2%;line-height:40px;" ng-click="closeModel()"></i>
+                        <h3>执剑人账户</h3>
+                    </header>
+                </ion-header-bar>
+                <ion-content>
+                    <div class="page30">
+                        <ul class="g-list">
+                            <li>兴业账户可用余额：
+                                <span class="r"><i ng-if="hpxXYAccount">{{hpxXYAccount}}元</i><i ng-if="!hpxXYAccount">0.00元</i></span>
+                            </li>
+                            <li>非兴业账户可用余额：
+                                <span class="r"><i ng-if="hpxNoXYAccount">{{hpxNoXYAccount}}元</i><i ng-if="!hpxNoXYAccount">0.00元</i></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-left col-md-7 col-md-offset-3" style="border:1px dashed #87868B;margin:25px 0.35rem;padding:6px;">
+                        <div style="text-align:center;"><strong>温馨提示：</strong></div>
+                        <p>兴业账户余额可用于收票，只可提现至兴业银行账户；非兴业账户余额不可用于收票，只可提现至非兴业银行账户。</p>
+                    </div>
+                    <div class="g-operate-price2">
+                        <div class="g-order-status">
+                            <a class="btn" style="margin-left:35%;" ng-click="withdraw()">提现</a>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

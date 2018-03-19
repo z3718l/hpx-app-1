@@ -1,0 +1,59 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我的任务
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="page24">
+            <div class="tabBox4">
+                <div class="hd">
+                    <ul class="hd_s">
+                        <li ng-class="{'on': tab == 1}"><a href="javascript:void(0)" ng-click="setTab(1)" style="width:100%;"><span style="display:inline-block;width:100%;font-size:0.4rem;">出票</span></a></li>
+                        <li ng-class="{'on': tab == 2}"><a href="javascript:void(0)" ng-click="setTab(2)" style="width:100%;"><span style="display:inline-block;width:100%;font-size:0.4rem;">收票</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="h_hr"></div>
+            <div ng-if="tab == 1">
+                <div class="item" ng-repeat="item in drawerListData">
+                    <p>票据号：{{item.bill_number}}</p>
+                    <p>订单号：{{item.order_num}}</p>
+                    <p>票据类型：电票  {{item.acceptor_type_name}}</p>
+                    <p>票面金额（元）：¥{{item.bill_sum_price}}</p>
+                    <p ng-if="item.task_code == 1">票据状态：卖家已确认交易，请买家付款<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 2})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 2">票据状态：卖家已背书，请买家签收<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 2})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 3">票据状态：卖家已进行评价，请买家进行评价<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 2})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 4">票据状态：请卖家确认是否交易<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, check: 1})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 5">票据状态：买家已付款，请卖家背书<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 1})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 6">票据状态：订单已完成，请卖家进行评价<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 1})">未完成&gt;&gt;</a></p>
+                </div>
+                <div ng-if="is_vis && drawerListData.length == 0;" class="hpxWu">
+                    暂无代办任务！
+                </div>
+            </div>
+            <div ng-if="tab == 2">
+                <div class="item" ng-repeat="item in reciverListData">
+                    <p>票据号：{{item.bill_number}}</p>
+                    <p>订单号：{{item.order_num}}</p>
+                    <p>票据类型：电票  {{item.acceptor_type_name}}</p>
+                    <p>票面金额（元）：¥{{item.bill_sum_price}}</p>
+                    <p ng-if="item.task_code == 1">票据状态：卖家已确认交易，请买家付款<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 2})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 2">票据状态：卖家已背书，请买家签收<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 2})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 3">票据状态：卖家已进行评价，请买家进行评价<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 2})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 4">票据状态：请卖家确认是否交易<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, check: 1})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 5">票据状态：买家已付款，请卖家背书<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 1})">未完成&gt;&gt;</a></p>
+                    <p ng-if="item.task_code == 6">票据状态：订单已完成，请卖家进行评价<a class="r" ui-sref="app.myReleaseDetail({'myReleaseBillId': item.bill_id, 'myReleaseOrderId': item.order_id, check: 1})">未完成&gt;&gt;</a></p>
+                </div>
+                <div ng-if="is_vis && listData.reciverListData == 0;" class="hpxWu">
+                    暂无代办任务！
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

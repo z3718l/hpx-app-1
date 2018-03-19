@@ -1,0 +1,49 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        我要收票
+    </ion-nav-title>
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <div class="page12-2">
+            <div class="hot">
+                <div ng-if="bill.bill_status_code != 802" ng-repeat="bill in listData" class="item">
+                    <div class="hot-title">
+                        <a href="">
+                            <span class="tag">{{bill.bill_type_name}}</span>
+                            <span>票面金额：<i>¥ <b>{{(bill.bill_sum_price / 10000).toFixed(2)}} 万</b></i></span>
+                            <!--<span class="tag">{{bill.bill_type_name}}</span>{{bill.drawer_name}}
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>0]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>1]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>2]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>3]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>4]"></i>-->
+                            <span class="addr">{{bill.product_location.length > 6 ? (bill.product_location | limitTo:3) : bill.product_location}}</span>
+                        </a>
+                    </div>
+                    <!--ui-sref="app.myReleaseDetail({myReleaseBillId:bill.id})"-->
+                    <div class="con" ng-click="hpxMyRe(bill)">
+                        <a href="">
+                           
+                            <!--<p>票面金额：<i>¥ <b>{{(bill.bill_sum_price / 10000).toFixed(2) }} 万</b></i></p>-->
+                            <!--<p>票面金额：<i>¥ <b>{{bill.bill_sum_price }} 元</b></i></p>-->
+                            <p>承兑机构 ：{{bill.acceptor_type_name}}</p>
+                            <p>到期日：{{bill.bill_deadline_time | date: 'yyyy-MM-dd'}}<time>{{bill.remaining_day}}天</time></p>
+                            <!--<span class="btn1">{{bill.bill_status_name}}</span>-->
+                            <span class="btn1">我要竞价</span>
+                        </a>
+                    </div>
+                </div>
+               <div ng-if="is_vis && listData.length == 0" class="hpxsorry">
+                   抱歉，暂无符合您查询条件的票据
+               </div> 
+              
+            </div>
+            <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+            </ion-infinite-scroll>
+        </div>
+    </ion-content>
+</ion-view>

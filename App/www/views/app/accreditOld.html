@@ -1,0 +1,48 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        机构认证
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="page20-identification">
+            <ul class="part1">
+                <li class="li1"><span>机构全称：</span><input type="text" ng-model="model.enterprise_name" placeholder="请输入机构全称" class="i1"></li>
+                <li class="li2"><span>营业执照注册号：</span><input ng-if="!model.is_verified || model.is_verified < 1" type="text" ng-model="model.credential_number" placeholder="请输入注册号" class="i2"></li>
+            </ul>
+            <ul class="part2">
+                <li class="li1">
+                    <p>营业执照上传</p>
+                    <div class="con">
+                        <img ng-if="model.credential_photo_address != ''" ng-click="openImgMagnifyModal(model.credential_photo_address)" src="{{model.credential_photo_address}}" alt="">
+                        <div class="upload" ng-click="takePhoto(0)"></div>
+                    </div>
+                </li>
+                <li>
+                    <p>法人代表身份证上传（正反面）</p>
+                    <div class="con">
+                        <img ng-if="model.artificial_person_front_photo_address != ''" ng-click="openImgMagnifyModal(model.artificial_person_front_photo_address)" src="{{model.artificial_person_front_photo_address}}" alt="">
+                        <div class="upload" ng-click="takePhoto(1)"></div>
+                    </div>
+                    <div class="con">
+                        <img ng-if="model.artificial_person_back_photo_address != ''" ng-click="openImgMagnifyModal(model.artificial_person_back_photo_address)" src="{{model.artificial_person_back_photo_address}}" alt="">
+                        <div class="upload" ng-click="takePhoto(2)"></div>
+                    </div>
+                    <div class="tips">提示：上传照片仅支持jpg/png格式</div>
+                </li>
+                <li class="operate"><input type="submit" ng-click="save()" value="确认提交"></li>
+            </ul>
+        </div>        
+        <!-- 图片放大页面弹框 -->
+        <script id="imgMagnify.html" type="text/ng-template">
+            <ion-modal-view hide-nav-bar="true" ng-click="closeImgMagnifyModal()">
+                <ion-content class="imgMagnify">
+                    <ion-scroll class="imgMagnify" zooming="true" min-zoom="0.5" max-zoom="3" direction="xy" scrollbar-x="false" scrollbar-y="false" has-bouncing="true" overflow-scroll="false" style="width: 100%; height:100%;">
+                        <div class="imgMagnify">
+                            <img ng-class="{rotate:rotate90}" src="{{img_path}}" />
+                        </div>
+                    </ion-scroll>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

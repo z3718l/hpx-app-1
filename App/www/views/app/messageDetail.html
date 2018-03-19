@@ -1,0 +1,16 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        消息详情
+    </ion-nav-title>
+    <ion-content>
+        <div class="page53">
+            <h1>{{model.notification_title}}</h1>
+            <h5>{{model.send_time | date:'yyyy-MM-dd HH:mm'}}</h5>
+            <p>{{model.notification_message}}</p>
+            <div class="g-order-status" style="text-align:center;">
+                <a class="btn" ng-click="deleteNotification()">删除</a>
+            </div>
+           
+        </div>
+    </ion-content>
+</ion-view>

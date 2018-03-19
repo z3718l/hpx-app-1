@@ -1,0 +1,1 @@
+$(function(){"use strict";!function(){$(".btn-upload").on("click",function(n){n.preventDefault(),$(".alert-input-img").fadeIn(300)}),$(".alert-input-img .btn-cancle").on("click",function(n){n.preventDefault(),$(".alert-input-img").fadeOut("300")})}()});

@@ -1,0 +1,108 @@
+﻿
+<ion-view cache-view="false">
+    <ion-nav-title>
+        工商查询
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="wrap">
+            <div class="page50">
+                <h3>企业名称关键字</h3>
+                <input type="text" ng-model="enterpriseName" placeholder="请输入企业名称关键字 (不少于四个字)">
+                <div class="operate">
+                    <input type="reset" ng-click="enterpriseName = null;enterpriseInfo = null;" value="清空">
+                    <input type="submit" ng-click="query(enterpriseName)" value="查询">
+                </div>
+                <div class="result">
+                    <div class="item" ng-repeat="item in enterpriseInfo">
+                        <p class="p">企业全称：<pre class="pre">{{item.name}}</pre></p>
+                        <div class="center">
+                            <a class="btn1 on" ng-click="openDetailModal(item)">详&nbsp&nbsp&nbsp细</a>
+                        </div>
+                        <p>注册时间：{{item.start_date}}</p>
+                        <p>信用代码：{{item.credit_code}}</p>
+                    </div>
+                </div>
+                <!--
+            <table class="list">
+                <!--<tr>
+                    <th>序号</th>
+                    <th>企业全称</th>
+                    <th>注册时间</th>
+                    <th>信用代码</th>
+                </tr>
+
+                <tr ng-repeat="item in enterpriseInfo">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.start_date}}</td>
+                    <td>{{item.credit_code}}</td>
+                </tr>
+            </table>-->
+            </div>
+            <!-- 图片放大页面弹框 -->
+        <script id="detail.html" type="text/ng-template">
+            <ion-modal-view ng-click="closeDetailModal()">
+                <ion-header-bar>
+                    <header>
+                        <!--<a href="" class="back"></a>-->
+                        <h3>企业详情</h3>
+                    </header>
+                </ion-header-bar>
+                <ion-content>
+                    <div class="page50">
+                        <div class="result">
+                            <div class="item">
+                                <p class="p">企业全称：<pre class="pre">{{enterpriseDetailInfo.name}}</pre></p>
+                                <p>注册时间：{{enterpriseDetailInfo.start_date}}</p>
+                                <p>营业执照：{{enterpriseDetailInfo.number}}</p>
+                                <p>信用代码：{{enterpriseDetailInfo.credit_code}}</p>
+                                <p>公司法人：{{enterpriseDetailInfo.artificial_person_name}}</p>
+                                <p>成立时间：{{enterpriseDetailInfo.start_date}}</p>
+                                <p class="p">登记机构：<pre class="pre">{{enterpriseDetailInfo.belong_organization}}</pre></p>
+                                <p>注册资金：{{enterpriseDetailInfo.registered_capital}}</p>
+                                <p>经营状态：{{enterpriseDetailInfo.status}}</p>
+                                <p class="p">营业范围：<pre class="pre">{{enterpriseDetailInfo.scope}}</pre></p>
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+       </div>
+        <!--购买弹窗-->
+        <script id="buyPopup.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar>
+                    <header>
+                        <h3>购买“工商查询”使用权限</h3>
+                    </header>
+                </ion-header-bar>
+                <ion-content>
+                    <div class="page30">
+                        <ul class="g-list">
+                            <li>企业名称：<span class="r">{{identity.enterprise_name}}</span></li>
+                            <li>联系人：<span class="r">{{identity.customer_name}}</span></li>
+                            <li>购买工具使用权限时长选择：</li>
+                            <li class="h_bty">
+                                <section ng-repeat="packages in package" style="width:24%;padding:0;display:inline-block;" ng-init="refresh()">
+                                    <div class="h_o" ng-click="hpxPack(packages)">
+                                        <input type="radio" name="sex" value="" $index />
+                                        <span>{{packages.package_timeornum}}</span><span>次</span>
+                                    </div>
+                                </section>
+                            </li>
+                            <li style="border-bottom: 1px solid #d6d6d6;">金额：<span class="r">￥{{price}}</span></li>
+                        </ul>
+                        <div class="g-order-status">
+                            <div class="hpxaa">
+                                <a class="btn-sure btn" style="margin-right: 34px;" ng-click="buy()" ng-disabled="!model.verify_code">购买</a>
+                                <a class="btn-cancle btn" ng-click="buyModal.hide()">取消</a>
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+</ion-content>
+</ion-view>

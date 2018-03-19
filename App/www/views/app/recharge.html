@@ -1,0 +1,40 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <p ui-sref="app.rechargerecord" style="align-self:center">充值记录</p>
+        <!--<button class="button" ng-click="app.rechargerecord">充值记录</button>-->
+    </ion-nav-buttons>
+    <ion-nav-title>
+        平台账户
+    </ion-nav-title>
+    <ion-content>
+
+        <div class="page19-2">
+            <div class="part1">
+                <span>充值金额：  </span><div><input style="width:50%;float:left" type="number" min="0" ng-model="model.recharge_price" placeholder="请输入充值金额"><p style="height: .66rem;line-height: .66rem;font-size: 14px;">元</p></div>
+            </div>
+            <h3>支付方式</h3>
+            <ul class="pay">
+                <li class="on">
+                    <img src="images/pay.png" alt="" class="icon">选择支付宝支付
+                </li>
+            </ul>
+            <div class="g-single-submit">
+                <input type="submit"  ng-click="submit()" value="确认支付">
+            </div>
+        </div>
+        <!--$scope.hpxMoney.platform_account_balance-->
+        <div class="hpxMoney">
+            <ul class="g-list">
+                <li>
+                    平台账户余额：
+                    <span class="r"><i ng-if="hpxMoney.platform_account_balance != 0">{{hpxMoney.platform_account_balance}}元</i><i ng-if="hpxMoney.platform_account_balance == 0 || !hpxMoney">0.00元</i></span>
+                </li>
+            </ul>
+        </div>
+        <div class="text-left col-md-7 col-md-offset-3" style="border:1px dashed #87868B;margin:25px 0.35rem;padding:6px;">
+            <div style="text-align:center;"><strong>温馨提示：</strong></div>
+            <p>平台账户余额仅用于购买平台汇票助手（挂失查询、工商查询）的使用时限，不能用于抵扣交易票款。</p>
+        </div>
+    </ion-content>
+
+</ion-view>

@@ -1,0 +1,21 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        修改手机
+    </ion-nav-title>
+    <ion-content>
+
+
+
+        <div class="page-modify-phone">
+            <ul>
+                <li>原手机号：<span ng-bind="changePhoneModel.old_phone_number"></span></li>
+                <li>原手机验证码：<input type="text" ng-model="changePhoneModel.phone_verify_code" class="i1"><a href="" ng-click="getOldPhoneVerify()" ng-bind="changePhoneModel.oldPhoneVerifyStr" class="btn-yzm" ng-class="{'on': !disableVerify1}">获取验证码</a></li>
+                <li>新手机号：<input type="text" ng-model="changePhoneModel.new_phone_number" placeholder="请输入新手机号" ng-change="PhoneChange()"></li>
+                <li>新手机验证码：<input type="text" ng-model="changePhoneModel.new_phone_verify_code" class="i1"><a href="" ng-click="getNewPhoneVerify()" ng-bind="changePhoneModel.newPhoneVerifyStr" class="btn-yzm" ng-class="{'on': !disableVerify2}">获取验证码</a></li>
+            </ul>
+            <div class="g-single-submit">
+                <input type="submit" ng-click="submit()" value="确认提交">
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,1 @@
+$(function(){"use strict";!function(){$(function(){$(".header-select-botttom").css({marginLeft:-$(".header-select-botttom").width()/2+"px"})}),$(window).resize(function(t){$(".header-select-botttom").css({marginLeft:-$(".header-select-botttom").width()/2+"px"})})}()});

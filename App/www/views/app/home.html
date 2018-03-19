@@ -1,0 +1,172 @@
+﻿<link rel="stylesheet" href="../../css/my-custom.css" />
+<ion-view cache-view="false" class="bg" hide-back-button="true" style="z-index: 1;" on-swipe-down="onSwipeDown()">
+    <ion-nav-title>
+        汇票线
+    </ion-nav-title>
+    <ion-content on-swipe-down="onSwipeDown()">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新数据……"
+                       refreshing-text="获取数据中……"
+                       spinner="ios">
+        </ion-refresher>
+        <!--<ion-slide-box class="hpxT" auto-play="true" does-continue="true" delegate-handle="slideboximgs" slide-interval=3000>-->
+        <ion-slide-box class="hpxT" auto-play="true" does-continue="true" slide-interval=3000>
+            <!--<ion-slide ng-repeat="bann in banner">
+            <div class="box" ng-click="judgeLogina(bann)">
+                <a href="#" class="acct0">
+                    <img ng-src="{{bann.img_url}}" />
+                </a>
+            </div>
+        </ion-slide>-->
+            <ion-slide>
+                <div class="box" ng-click="judgeLogind()">
+                    <a href="#"><img src="images/hpxBanner00.png" /></a>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="box" ng-click="judgeLogina()">
+                    <a href="#"><img src="images/hpxBanner01.png" /></a>
+                </div>
+            </ion-slide>
+            <ion-slide>
+            <div class="box" ng-click="judgeLogin()">
+                <a href="#"><img src="images/hpxBanner02.png" /></a>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="box" ng-click="judgeLoginc()">
+                <a href="#"><img src="images/hpxBanner03.png" /></a>
+            </div>
+        </ion-slide>
+        
+        </ion-slide-box>
+        <!--</ion-scroll>-->
+
+        <div class="page1">
+            <ul class="cnav11">
+                <!--<li><a ui-sref="app.billOffer"><img src="images/icon11-1.png" alt="">报价信息</a></li>-->
+                <li><a ng-click="hpxBill()"><img src="images/icon11-1.png" alt="">报价信息</a></li>
+                <li><a ui-sref="app.billQuery"><img src="images/icon11-2.png" alt="">票源信息</a></li>
+            </ul>
+            <div class="title"><span>汇票助手</span></div>
+            <ul class="cnav12">
+                <li><a ui-sref="app.calculator"><img src="images/icon12-1.png" alt="">贴现计算器</a></li>
+                <li><a ui-sref="app.calendar"><img src="images/icon12-2.png" alt="">开票日历</a></li>
+                <li style="border-bottom: 1px solid #f2f2f2;"><a ui-sref="app.jobQuery"><img src="images/icon12-3.png" alt="">挂失查询</a></li>
+                <li><a ui-sref="app.bankQuery"><img src="images/icon12-4.png" alt="">行号查询</a></li>
+                <li><a ui-sref="app.businessQuery"><img src="images/icon12-5.png" alt="">工商查询</a></li>
+                <li><a ui-sref="app.smearBill"><img src="images/icon12-6.png" alt="">票面涂抹</a></li>
+            </ul>
+            <div class="title"><span>热门推荐</span></div>
+            <div class="hot">
+                <div class="item" ng-repeat="product in products">
+                    <div class="hot-title">
+                        <a href="">
+                            <span class="tag">{{product.bill_type_name}}</span>
+                            <span>票面金额：<i>¥ <b>{{(product.bill_sum_price / 10000).toFixed(2)}} 万</b></i></span>
+                            <!--{{product.drawer_name}}
+                            <i ng-class="{true: 'star on', false: 'star'}[product.star>0]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[product.star>1]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[product.star>2]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[product.star>3]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[product.star>4]"></i>-->
+                            <span class="addr">{{product.enterprise_location| limitTo:10}}{{product.enterprise_location.length > 10 ? '...':''}}</span>
+                        </a>
+                    </div>
+                    <!--ui-sref="app.myReleaseDetail({myReleaseBillId:product.id})"-->
+                    <div class="con" ng-click="hpxShou(product.id)">
+                        <!--<p>票面金额：<i>¥ <b>{{product.bill_sum_price}} 万</b></i></p>-->
+                        <p>承兑机构 ：{{product.acceptor_type_name}}</p>
+                        <p ng-if="product.bill_deadline_time!=null">到期日：{{product.bill_deadline_time}}<time>{{product.remaining_day}}天</time></p>
+                        <p ng-if="product.bill_deadline_time==null">到期日：未知</p>
+                        <a href="" class="btn1" ng-if="product.bill_status_code<804">我要竞价</a>
+                        <a href="" class="btn2" ng-if="product.bill_status_code>803">完成交易</a>
+                    </div>
+                </div>
+                <!--onDaLs  billOfferDetail-->
+                <div class="item" ng-repeat="bill in bills" ng-click="changeBillOfferId(bill.id)" ui-sref="app.onDaLs">
+                    <!--<div class="hot-title center" style="float:left;width:15%;background-color: #518cff;">
+                        <a href="">
+                            <span class="tag blue">{{bill.bill_style_name}}</span>
+                        </a>
+                    </div>-->
+                    <div class="hot-title">
+                        <a href="">
+                            <span class="tag blue">{{bill.bill_style_name}}</span>
+                            <span class="name">{{bill.enterprise_name | limitTo:6}}</span>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>0]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>1]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>2]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>3]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>4]"></i>
+                            <span class="addr">{{bill.enterprise_location | limitTo:10}}{{bill.enterprise_location.length > 10 ? '...':''}}</span>
+                        </a>
+                    </div>
+                    <!--<div class="con2" style="float:left;width:83%;padding: .2rem 0;">
+                        <p><span class="name">{{bill.enterprise_name | limitTo:6}}</span>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>0]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>1]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>2]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>3]"></i>
+                            <i ng-class="{true: 'star on', false: 'star'}[bill.star>4]"></i>
+                            <span class="addr">{{bill.enterprise_location.length > 6 ? (bill.enterprise_location | limitTo:3) : bill.enterprise_location}}</span>
+                        </p>
+                    </div>-->
+                    <table class="tb2">
+                        <tr>
+                            <td ng-show="bill.bill_style_id != 205">国股</td>
+                            <td ng-show="bill.bill_style_id != 205">城商</td>
+                            <td ng-show="bill.bill_style_id != 205">三农</td>
+                            <td ng-show="bill.bill_style_id != 205">村镇</td>
+                            <td ng-show="bill.bill_style_id != 205">外资</td>
+                            <td ng-show="bill.bill_style_id != 205">财务</td>
+                            <td ng-show="bill.bill_style_id == 205">电票</td>
+                            <td ng-show="bill.bill_style_id == 205">纸票</td>
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;</td>
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;</td>
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;</td>
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td ng-show="bill.bill_style_id == 202 || bill.bill_style_id == 205">{{bill.offer_detail.offer_rate01 == null ? "--" : (bill.offer_detail.offer_rate01 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate01 != null">{{bill.offer_detail.offer_rate01 == null ? "--" : (bill.offer_detail.offer_rate01 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate01 == null && bill.offer_detail.offer_rate31 != null">{{bill.offer_detail.offer_rate31 == null ? "--" : (bill.offer_detail.offer_rate31 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate01 == null && bill.offer_detail.offer_rate31 == null">{{bill.offer_detail.offer_rate61 == null ? "--" : (bill.offer_detail.offer_rate61 | number:2)}}</td>
+
+                            <td ng-show="bill.bill_style_id == 202 || bill.bill_style_id == 205">{{bill.offer_detail.offer_rate02 == null ? "--" : (bill.offer_detail.offer_rate02 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate02 != null">{{bill.offer_detail.offer_rate02 == null ? "--" : (bill.offer_detail.offer_rate02 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate02 == null && bill.offer_detail.offer_rate32 != null">{{bill.offer_detail.offer_rate32 == null ? "--" : (bill.offer_detail.offer_rate32 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate02 == null && bill.offer_detail.offer_rate32 == null">{{bill.offer_detail.offer_rate62 == null ? "--" : (bill.offer_detail.offer_rate62 | number:2)}}</td>
+
+                            <td ng-show="bill.bill_style_id == 202">{{bill.offer_detail.offer_rate03 == null ? "--" : (bill.offer_detail.offer_rate03 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate03 != null">{{bill.offer_detail.offer_rate03 == null ? "--" : (bill.offer_detail.offer_rate03 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate03 == null && bill.offer_detail.offer_rate33 != null">{{bill.offer_detail.offer_rate33 == null ? "--" : (bill.offer_detail.offer_rate33 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate03 == null && bill.offer_detail.offer_rate33 == null">{{bill.offer_detail.offer_rate63 == null ? "--" : (bill.offer_detail.offer_rate63 | number:2)}}</td>
+
+                            <td ng-show="bill.bill_style_id == 202">{{bill.offer_detail.offer_rate04 == null ? "--" : (bill.offer_detail.offer_rate04 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate04 != null">{{bill.offer_detail.offer_rate04 == null ? "--" : (bill.offer_detail.offer_rate04 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate04 == null && bill.offer_detail.offer_rate34 != null">{{bill.offer_detail.offer_rate34 == null ? "--" : (bill.offer_detail.offer_rate34 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate04 == null && bill.offer_detail.offer_rate34 == null">{{bill.offer_detail.offer_rate64 == null ? "--" : (bill.offer_detail.offer_rate64 | number:2)}}</td>
+
+                            <td ng-show="bill.bill_style_id == 202">{{bill.offer_detail.offer_rate05 == null ? "--" : (bill.offer_detail.offer_rate05 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate05 != null">{{bill.offer_detail.offer_rate05 == null ? "--" : (bill.offer_detail.offer_rate05 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate05 == null && bill.offer_detail.offer_rate05 != null">{{bill.offer_detail.offer_rate35 == null ? "--" : (bill.offer_detail.offer_rate35 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate05 == null && bill.offer_detail.offer_rate35 == null">{{bill.offer_detail.offer_rate65 == null ? "--" : (bill.offer_detail.offer_rate65 | number:2)}}</td>
+
+                            <td ng-show="bill.bill_style_id == 202">{{bill.offer_detail.offer_rate06 == null ? "--" : (bill.offer_detail.offer_rate06 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate06 != null">{{bill.offer_detail.offer_rate06 == null ? "--" : (bill.offer_detail.offer_rate06 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate06 == null && bill.offer_detail.offer_rate06 != null">{{bill.offer_detail.offer_rate36 == null ? "--" : (bill.offer_detail.offer_rate36 | number:2)}}</td>
+                            <td ng-show="(bill.bill_style_id == 203 || bill.bill_style_id == 204) && bill.offer_detail.offer_rate06 == null && bill.offer_detail.offer_rate36 == null">{{bill.offer_detail.offer_rate66 == null ? "--" : (bill.offer_detail.offer_rate66 | number:2)}}</td>
+
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td ng-show="bill.bill_style_id == 205">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                    </table>
+                    <a href="" class="btn3">查看报价</a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

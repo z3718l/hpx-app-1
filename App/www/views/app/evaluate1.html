@@ -1,0 +1,44 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        评价详情
+    </ion-nav-title>
+    <ion-content>
+        <div class="page58">
+            <div class="item">
+                <h3>出票方评价</h3>
+                <ul>
+                    <li>
+                        <span>评分</span>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>0]" ng-click="chioceStar11()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>1]" ng-click="chioceStar12()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>2]" ng-click="chioceStar13()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>3]" ng-click="chioceStar14()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star1>4]" ng-click="chioceStar15()"></i>
+                    </li>
+                    <li><span>内容</span>满意，效率够快，以后继续合作</li>
+                </ul>
+            </div>
+            <div class="item">
+                <h3>收票方评价</h3>
+                <ul>
+                    <li class="js_star-choose">
+                        <span>评分</span>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star2>0]" ng-click="chioceStar21()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star2>1]" ng-click="chioceStar22()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star2>2]" ng-click="chioceStar23()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star2>3]" ng-click="chioceStar24()"></i>
+                        <i ng-class="{true: 'star on', false: 'star'}[model.star2>4]" ng-click="chioceStar25()"></i>
+                    </li>
+                    <li><span>内容</span></li>
+                </ul>
+            </div>
+            <div class="txt">
+                <textarea name="" id="" cols="30" rows="10" placeholder="请在此输入您对出票方的具体评价（如票据背书，信用等方面）"></textarea>
+                <div class="g-single-submit">
+                    <input type="submit" value="提交评价">
+                    <input type="submit" style="margin-top:1em" ng-click="" value="取消">
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

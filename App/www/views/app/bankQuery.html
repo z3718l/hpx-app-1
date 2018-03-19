@@ -1,0 +1,123 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        行号查询
+    </ion-nav-title>
+    <ion-content>
+        <div class="page45">
+            <div id="tabBox1" class="tabBox45">
+                <div class="hd">
+                    <ul>
+                        <li ng-class="{'on': tab == 1}"><a href="javascript:void(0)"  ng-click="setTab(1)">行名模糊查询</a></li>
+                        <li ng-class="{'on': tab == 2}"><a href="javascript:void(0)" ng-click="setTab(2)">行号精确查询</a></li>
+                    </ul>
+                </div>
+                <div class="bd" id="tabBox1-bd">
+                    <!-- 行名模糊查询 -->
+                    <div class="con page50" ng-if="tab==1" >
+                        <div>
+                            <ul class="page45-2">
+                                <li><i>*</i>选择省份</li>
+                                <li class="right">
+                                    <select name="" id="" ng-model="model.province_id" ng-options="item.id as item.address_name for item in ProvinceData" ng-change="provinceChange()">
+                                        <option value="">请选择省份</option>
+                                    </select>
+                                </li>
+                                <li><i>*</i>市级</li>
+                                <li class="right">
+                                    <select name="" id="" ng-model="model.city_id" ng-options="item.id as item.address_name for item in CityData">
+                                        <option value="">请选择市级</option>
+                                    </select>
+                                </li>
+                                <!--<li><i>*</i>县（区）</li>
+                                <li>
+                                    <select name="" id="" ng-model="model.address_id" ng-options="item.id as item.address_name for item in AddressData">
+                                        <option value="">请选择县（区）</option>
+                                    </select>
+
+                                    <!--select name="" id="">
+                                        <option value="" ng-model="bankQueryModel.Dstrictid">请选择县（区）</option>
+                                        <option value="" ng-repeat="d in bankQueryModel.Districtids" ng-bind="d"></option>
+                                        <!--option value="">请选择县（区）</!--option>
+                                    </select>
+                                </li>-->
+
+                                <li><i>*</i>银行名称</li>
+                                <li class="right">
+                                    <select name="" id="" ng-model="model.head_bank_id" ng-options="item.id as item.bank_name for item in bankData">
+                                        <option value="">请选择银行</option>
+                                    </select>
+                                </li>
+                                <li>关键字</li>
+                                <li class="right"><input style="height:0.88rem;line-height:0.88rem;display:inline-block;margin-top: -3px;border-bottom:1px solid #d6d6d6;" type="text" class="text" ng-model="model.keyword" name="" placeholder="如：农业 上海(最多支持两个关键字)"></li>
+                            </ul>
+                            <div class="operate">
+                                <input type="reset" ng-click="model.keyword=null;model.head_bank_id=null;model.province_id=null;model.city_id=null;branchVagueData=null;" value="清空">
+                                <input type="submit" ng-click="queryVague()" value="查询">
+                            </div>
+                        </div>
+                        <div class="result">
+                            <div class="item" ng-repeat="item in branchVagueData">
+                                <p>大额行号：{{item.bank_number}}</p>
+                                <p class="p">银行名称：<pre class="pre">{{item.bank_name}}</pre></p>
+                                <p>联系电话：{{item.description}}</p>
+                            </div>
+                        </div>
+                        <!--
+                        <table class="list">
+                            <tr>
+                                <th>序号</th>
+                                <th>大额行号</th>
+                                <th>银行名称</th>
+                                <th>联系电话</th>
+                            </tr>
+                            <tr ng-repeat="item in branchVagueData">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{item.bank_number}}</td>
+                                <td>{{item.bank_name}}</td>
+                                <td>{{item.description}}</td>
+                            </tr>
+                        </table>-->
+                    </div>
+                    <!-- /行名模糊查询 -->                    <!-- 行号精确查询 -->
+                    <div class="con page50" ng-if="tab==2">
+                        <div>
+                            <div class="page45-1">
+                                <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="请输入行号" ng-model="model.precise_id" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                <!--<input type="text" placeholder="请输入行号">-->
+                            </div>
+                            <div class="operate">
+                                <input type="reset" ng-click="model.precise_id=null;branchPreciseData=null;" value="清空">
+                                <input type="submit" ng-click="queryPrecise()" value="查询">
+                            </div>
+                        </div>
+                        <div class="result hpxResult">
+                            <div class="item" ng-if="branchPreciseData">
+                                <p>大额行号：{{branchPreciseData.bank_number}}</p>
+                                <span style="font-size:14px;">银行名称：{{branchPreciseData.bank_name}}</span>
+                                <p>联系电话：{{branchPreciseData.description}}</p>
+                            </div>
+                        </div>
+                        <!--
+                            <table class="list">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>大额行号</th>
+                                    <th>银行名称</th>
+                                    <th>联系电话</th>
+                                </tr>
+                                <tr ng-if="branchPreciseData">
+                                    <td>1</td>
+                                    <td>{{branchPreciseData.bank_number}}</td>
+                                    <td>{{branchPreciseData.bank_name}}</td>
+                                    <td>{{branchPreciseData.description}}</td>
+                                </tr>
+                            </table>-->
+                    </div>
+                    <!-- /行号精确查询 -->
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,37 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-share" menu-toggle="right" ng-click="share()"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        获取邀请码
+    </ion-nav-title>
+    <ion-content>
+        <div class="detailer">
+            <!--<h2>您的邀请码为</h2>-->
+            <div class="hpxY">
+                <img src="images/hpxYao4.png"/>
+            </div>
+            <div class="yqm">
+                <span>
+                    {{hpxgA[0]}}
+                </span>
+                <span>
+                    {{hpxgA[1]}}
+                </span>
+                <span>
+                    {{hpxgA[2]}}
+                </span>
+                <span ng-if="hpxgA.length >= 4">
+                    {{hpxgA[3]}}
+                </span>
+                <span ng-if="hpxgA.length >= 5">
+                    {{hpxgA[4]}}
+                </span>
+            </div>
+            <p>您可以“点击右上角分享按钮”分享给朋友注册使用汇票线平台(官网/App),即可获取附加权益，也为朋友送上惊喜特权！</p>
+            <div class="cder"><img src="images/phxt.png" /></div>
+            
+        </div>
+    </ion-content>
+
+</ion-view>

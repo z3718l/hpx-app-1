@@ -1,0 +1,57 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" style="font-size: 0.33rem;" menu-toggle="right" ng-click="hpxColse()">关闭</button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        账户绑定
+    </ion-nav-title>
+    <ion-content>
+        <div class="page66">
+            <div class="part2">
+                <h3>机构名称：{{ findEnterprise.enterprise_name }}</h3>
+                <ul>
+                    <li><span>账号：</span><input type="text" ng-model="model.account_number" placeholder="请输入账号"></li>
+                    <li><span>开户行：</span><input ng-if="hpxBanks.bank_branch_name != null" type="text" ng-model="hpxBanks.bank_branch_name"><b style="position:absolute;right:0;font-weight:normal;color:#f00;" ng-if="hpxBanks && hpxBanks.bank_branch_name == null && model.cnaps_code.length == 12">暂无该银行，请输入正确的支行行号</b></li>
+                    <li><span>联行号：</span><input type="text" ng-change="hpxFindBank()" ng-model="model.cnaps_code" ng-pattern="/\d{12}/" maxlength="12" placeholder="请输入开户行支行行号"></li>               
+                    <!--<li class="yz"><span>账户验证：</span><input type="text" style="border-bottom:1px solid #eee;" ng-model="model.verify_string" placeholder="请输入该账户收款金额"><a href="" class="btn-yz" ng-click="getVerifyh()" ng-class="{'off': disableVerify}">{{ verifyStr }}</a></li>-->
+                    <li ng-if="disableVerify"><span>等待10分钟后，收到账户收款金额时，请返回填写</span></li>
+                </ul>
+                <div class="operate" style="text-align:center;">
+                    <a href="" class="btn-submit1" ng-click="saveAccount()">提交保存</a>
+                    <a href="" class="btn-submit2" ui-sref="app.accountStatus">跳过</a>
+                </div>
+                <div class="tips">
+                    <b>温馨提示：</b>点击“提交保存”按钮后，所绑定的银行账户将在10分钟后收到一笔随机汇款，请填写验证金额后再点击“提交”按钮。银行账号一经绑定成功，后期无法更改，请慎重选择常用账号。
+                </div>
+            </div>
+        </div>
+        <!--注册成功后的弹窗-->
+        <script id="successTip.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar>
+                    <header>
+                        <h3>账户绑定完成</h3>
+                    </header>
+                </ion-header-bar>
+                <ion-content>
+                    <div class="page69">
+                        <h3><img src="images/icon691.png" alt="" class="icon">恭喜您的兴业电子账户已经创建成功！</h3>
+                        <div class="txt">
+                            <p>{{identifyModel.enterprise_name}},</p>
+                            <p>您的兴业电子账户登录用户名为{{identifyModel.xingYeUserName}}，</p>
+                            <p>初始登录密码为{{identifyModel.xingYePassword}}。</p>
+                        </div>
+                        <div class="info">
+                            <p>
+                                以上“兴业电子账户”用户名及初始密码，可登录汇票线PC官网进行查看及前往兴业执剑人见证代管系统（兴业银行集团旗下系统）重新设置登录密码及支付密码。
+                            </p>
+                        </div>
+                        <div class="g-order-status g-hpxxx" style="text-align: center;">   
+                            <a href="" class="btn" ng-click="complete()">好的，我知道了</a>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>
